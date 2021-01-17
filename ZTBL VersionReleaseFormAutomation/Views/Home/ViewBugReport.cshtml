@@ -1,0 +1,451 @@
+﻿@model ZTBL_VersionReleaseFormAutomation.Models.BugReport
+@using System.Collections.Generic;
+@using System.Web.Optimization;
+@{
+    Layout = null;
+}
+
+
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SB Admin - Start Bootstrap Template</title>
+    <!-- Bootstrap core CSS-->
+    <link href="~/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    @Styles.Render("~/Content/vendor/bootstrap/css/bootstrap.min.css")
+    <!-- Custom fonts for this template-->
+    <link href="~/Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">*
+    @Styles.Render("~/Content/vendor/font-awesome/css/font-awesome.min.css")
+    <!-- Page level plugin CSS-->
+    <link href="~/Content/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    @Styles.Render("~/Content/vendor/datatables/dataTables.bootstrap4.css")
+    <!-- Custom styles for this template-->
+    <link href="~/Content/css/sb-admin.css" rel="stylesheet">
+    @Styles.Render("~/Content/css/sb-admin.css")
+
+
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/popper/popper.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="~/Content/vendor/chart.js/Chart.min.js"></script>
+    <script src="~/Content/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="~/Content/js/sb-admin.min.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="~/Content/js/sb-admin-datatables.min.js"></script>
+    <script src="~/Content/js/sb-admin-charts.min.js"></script>
+
+    <script>
+
+        function printout() {
+
+            var newWindow = window.open();
+
+            newWindow.document.write()
+            document.getElementById("header").style.display = "block";
+            newWindow.document.write(document.getElementById("header").innerHTML);
+            //newWindow.document.write("<center><img src='~/Content/logoztbl.jpg' width='60' height='80'></center><br>");
+            newWindow.document.write("<br><br>");
+            //var yy = document.getElementById("BRInfoReport");
+            //yy.style.display = "block";
+            newWindow.document.write(document.getElementById("BRInfo").innerHTML);
+            var zz = document.getElementById("BRTable");
+            //var yy = document.getElementById("RFLGenerated");
+            zz.style.display = "block";
+            //yy.style.display = "block";
+            newWindow.document.write("<br><center style='font-size:20px'><u><b>Bugs</b></u></center><br>");
+            //newWindow.document.write("<b style='font-size:25px'><center>Software Features List</center></b><br><br>");
+            newWindow.document.write(document.getElementById("BRTable").innerHTML);
+            //newWindow.document.write("<br>");
+            //newWindow.document.write("<b style='font-size:25px'><center>Released Files List</center></b><br><br>");
+            //newWindow.document.write(document.getElementById("RFLGenerated").innerHTML);
+            //yy.style.display = "none";
+            zz.style.display = "none";
+            document.getElementById("header").style.display = "none";
+            newWindow.alert("Note:\nSet Paper Size to A3 for best Results.");
+            //yy.style.display = "none";
+            newWindow.print();
+
+            //newWindow.save('versionrelease.pdf');
+        }
+
+    </script>
+
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!-- Navigation-->
+
+    <div style="width:100%;border:solid;display:none" id="header">
+        <div style="display:table; width:100%;outline:solid;">
+            <div style="display: table-cell;  width: 20%; border: thick;"><img src="~/Content/logoztbl.jpg" width="50px" style="padding-top:4px;padding-left:3px" height="65px" /></div>
+            <div style="display: table-cell; padding-left: 180px; padding: 7px; width: 80%; border: thick;"><b style="font-size:30px;margin-left:30%">Bug Report</b></div>
+        </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <img src="~/Content/logoztbl.jpg" height="50px" width="28px" style="border-radius:3px" />&nbsp;&nbsp;&nbsp;<a class="navbar-brand" href="@Url.Action("Dashboard","Home")">Version Release</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="@Url.Action("Dashboard","Home")">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Dashboard</span>
+                    </a>
+                </li>
+                
+                @if ((ViewBag.UserRole).Contains("SDD") == true)
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="CreateNewForm">
+                        <a class="nav-link" href="@Url.Action("CreateNewVersionRelease","Home")">
+                            <i class="fa fa-fw fa-book"></i>
+                            <span class="nav-link-text">Create New Form</span>
+                        </a>
+                    </li>
+                }
+                @if ((ViewBag.UserRole).Contains("QA") == true)
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="CreateNewForm">
+                        <a class="nav-link" href="@Url.Action("CreateBugReport","Home")">
+                            <i class="fa fa-fw fa-book"></i>
+                            <span class="nav-link-text">Create Bug Report</span>
+                        </a>
+                    </li>
+                }
+                
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="BugReports">
+                    <a class="nav-link" href="@Url.Action("BugReport","Home")">
+                        <i class="fa fa-fw fa-chain-broken"></i>
+                        <span class="nav-link-text">Bug Reports</span>
+                    </a>
+                </li>
+
+
+                @if (ViewBag.UserType == "Admin")
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+                            <i class="fa fa-fw fa-table"></i>
+                            <span class="nav-link-text">Admin Panel</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="collapseComponents">
+                            <li>
+                                <a href="@Url.Action("AdminPanel","Home")">See Users</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Register","Home")">Add New Users</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ManageProject","Home")">Manage Projects</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+
+                
+            </ul>
+            <ul class="navbar-nav sidenav-toggler">
+                
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0 mr-lg-2">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </li>
+                <li>
+                    <p style="color:white;padding-top:7px">@ViewBag.Username, @ViewBag.UserRole </p>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-fw fa-sign-out"></i>Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    
+    <div class="Content-wrapper">
+        <div class="container-fluid">
+                <div style="display:table;width:100%;height:80px;border:solid;padding-left:10px">
+                    <div style="display: table-cell; width: 10%"><img src="~/Content/logoztbl.jpg" width="60" height="80" /></div>
+                    <div style="display: table-cell" class="animated fadeIn"><legend><b style="color: maroon; margin-left: 320px">Bug Report</b></legend></div>
+                </div><br />
+            <div id="BRInfo">
+
+                <div style="display:table;width:100%;text-align:left">
+                    <div style="display:table-row">
+                        <div style="display:table-cell;width:33%">
+                            <b> Bug Report ID:</b> BR-@ViewBag.BRId
+                        </div>
+                        <div style="display:table-cell;width:33%">
+                            <b> Project Name:</b> @ViewBag.ProjectName
+                        </div>
+                        <div style="display:table-cell;width:34%">
+                            <b> Vesion/Release:</b> @ViewBag.Version
+                        </div>
+                    </div>
+                    <div style="display:table-row">
+                        <div style="display:table-cell">
+                            <b>Testing Type:</b> @ViewBag.TestingType
+                        </div>
+                        <div style="display:table-cell">
+                            <b>Tester(s) Name:</b> @ViewBag.TesterName
+                        </div>
+                        <div style="display:table-cell">
+                            <b>Testing Cycle:</b> @ViewBag.TestingCycle
+                        </div>
+                    </div>
+                    <div style="display:table-row">
+                        <div style="display:table-cell">
+                            <b>Reviewer(s):</b> @ViewBag.Reviewer
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <!-- Breadcrumbs-->
+                @*<b> Bug Report ID:</b> BR-@ViewBag.BRId<br /><br />
+                <b> Project Name:</b> @ViewBag.ProjectName<br /><br />
+                <b> Vesion/Release:</b> @ViewBag.Version</b> <br /><br />
+                <b>Testing Type:</b> @ViewBag.TestingType <br /><br />
+                <b>Tester(s) Name:</b> @ViewBag.TesterName<br /><br />
+                <b>Testing Cycle:</b> @ViewBag.TestingCycle<br /><br />
+                <b>Reviewer(s):</b> @ViewBag.Reviewer<br /><br />*@
+            </div>
+          
+              <div id="BRInfoReport" style="display:none">
+                  <table>  
+                      <thead></thead>
+                  <tbody>
+                        <tr style="border:1px solid">
+                            <b> Bug Report ID:</b> BR-@ViewBag.BRId
+                        </tr>
+                        <tr style="border:1px solid">
+                            <b> Project Name:</b> @ViewBag.ProjectName
+                        </tr>
+                        <tr style="border:1px solid">
+                            <b> Vesion/Release:</b> @ViewBag.Version</b>
+                        </tr>
+                        <tr style="border:1px solid">
+                            <b>Testing Type:</b> @ViewBag.TestingType
+
+                        </tr>
+                        <tr style="border:1px solid">
+                            <b>Tester(s) Name:</b> @ViewBag.TesterName
+                        </tr>
+                        <tr style="border:1px solid">
+                            <b>Testing Cycle:</b> @ViewBag.TestingCycle
+                            </trstyle>
+                        <tr style="border:1px solid">
+                            b>Reviewer(s):</b> @ViewBag.Reviewer
+                        </tr>
+                    </tbody>
+                </table>
+               
+            </div>
+            <div style="display:table;width:100%">
+                <div style="display:table-cell">
+                    <a href="VersionReleaseForm?formId=@ViewBag.FormId">View Version Release Form</a><br />
+                </div>
+                <div style="display:table-cell;text-align:right">
+                    <a href="" onclick="printout()">Print/Export as PDF</a>
+                </div>
+            </div>
+            <br />
+            @if(ViewBag.Access=="granted"){
+                <center><a class="btn btn-primary" href="@Url.Action("AddBugtoReport","Home")">Add bug</a></center>
+            <table>
+
+            </table>
+            }
+            
+
+            <div id="BRTable" style="display:none">
+            <table style="width:100%;text-align:left;border:solid">
+                <thead >
+                    <tr>
+                        <th style="width:10%;border:1px solid">
+                            No.
+                        </th>
+                        <th style="width: 15%; border: 1px solid">
+                            @Html.DisplayName("Bug Title")
+                        </th>
+                        <th style="width: 20%; border: 1px solid">
+                            @Html.DisplayName("Bug Description")
+                        </th>
+                        <th style="width: 15%; border: 1px solid">
+                            @Html.DisplayName("Reporting Date")
+                        </th>
+                        <th style="width: 15%; border: 1px solid">
+                            @Html.DisplayName("Severity")
+                        </th>
+                        <th style="width: 15%; border: 1px solid">
+                            @Html.DisplayName("Dev Status")
+                        </th>
+                        <th style="width: 15%; border: 1px solid">
+                            @Html.DisplayName("QA Status")
+                        </th>
+                     </tr>
+                </thead>
+                <tbody>
+                    @{
+                        
+                    int k=0;
+                    foreach (var item in (IEnumerable<ZTBL_VersionReleaseFormAutomation.Models.BugReportTable>)ViewBag.ReportTableName)
+                    {k++;
+
+                        //onclick="@("window.location.href='" + @Url.Action("FormPage", "Home", new { fid = item.FormId }) + "'");"
+                        <tr>
+                            <td style="border: 1px solid">@Html.DisplayName(k.ToString())</td>
+                            <td style="border: 1px solid"> @Html.DisplayFor(modelItem => item.Table_BugTitle)</td>
+                            <td style="border: 1px solid">@Html.DisplayFor(modelItem => item.Table_BugDescription)</td>
+                            <td style="border: 1px solid"> @Html.DisplayFor(modelItem => item.Table_ReportingDate)</td>
+                            <td style="border: 1px solid">@Html.DisplayFor(modelItem => item.Table_Severirty)</td>
+                            <td style="border: 1px solid"> @Html.DisplayFor(modelItem => item.Table_DevStatus)</td>
+                            <td style="border: 1px solid"> @Html.DisplayFor(modelItem => item.Table_QAStatus)</td>
+
+                        </tr>}}
+                 </tbody>
+                    </table>
+                    
+</div>
+
+
+            <table style="background-color: black; color: #f9f9f9; font-family: 'Raleway', sans-serif; " class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayName("No.")
+                            @*@Html.DisplayNameFor(model => model.Table_BugId)*@
+                        </th>
+                        <th>
+                            @Html.DisplayName("Bug Title")
+                            @*@Html.DisplayNameFor(model =>model.Table_BugTitle)*@
+                        </th>
+                        <th>
+                            @Html.DisplayName("Bug Description")
+                            @*@Html.DisplayNameFor(model => model.Table_BugDescription)*@
+                        </th>
+                        <th>
+                            @Html.DisplayName("Reporting Date")
+                            @*@Html.DisplayNameFor(model => model.Table_ReportingDate)*@
+                        </th>
+                        <th>
+                            @Html.DisplayName("Severity")
+                            @*@Html.DisplayNameFor(model => model.Table_Severirty)*@
+                        </th>
+                        <th>
+                            @Html.DisplayName("Dev Status")
+                            @*@Html.DisplayNameFor(model => model.Table_DevStatus)*@
+                        </th>
+                        <th>
+                            @Html.DisplayName("QA Status")
+                            @*@Html.DisplayNameFor(model => model.Table_QAStatus)*@
+                        </th>
+                        <th>
+                            @Html.DisplayName("Actions")
+                        </th>
+
+
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int i=0;
+                    foreach (var item in (IEnumerable<ZTBL_VersionReleaseFormAutomation.Models.BugReportTable>)ViewBag.ReportTableName)
+                    {i++;
+                       
+                        //onclick="@("window.location.href='" + @Url.Action("FormPage", "Home", new { fid = item.FormId }) + "'");"
+                        <tr class="unread">
+                            <td class="view-message  dont-show">@Html.DisplayName(i.ToString())</td>
+                            <td class="view-message dont-show"> @Html.DisplayFor(modelItem => item.Table_BugTitle)</td>
+                            <td class="view-message  dont-show">@Html.DisplayFor(modelItem => item.Table_BugDescription)</td>
+                            <td class="view-message dont-show"> @Html.DisplayFor(modelItem => item.Table_ReportingDate)</td>
+                            <td class="view-message  dont-show">@Html.DisplayFor(modelItem => item.Table_Severirty)</td>
+                            <td class="view-message dont-show"> @Html.DisplayFor(modelItem => item.Table_DevStatus)</td>
+                            <td class="view-message dont-show"> @Html.DisplayFor(modelItem => item.Table_QAStatus)</td>
+                           
+                            <td class="view-message dont-show">
+                                <a href="EditBug?BugId=@item.Table_BugId" style="cursor: hand; color: #00aaf9">Edit</a>
+                                <a data-target="#exampleModal_@item.ID" style="cursor:hand;color:red" data-toggle="modal">Delete</a> 
+                            </td>
+                       
+                         </tr>
+
+                                    <!-- Delete Modal -->
+                        <div class="modal fade" id="exampleModal_@item.ID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-Content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel2">Are you sure?</h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">Select "Delete" below if you are sure to delete this Bug.</div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                        <a class="btn btn-primary" href="@Url.Action("DeleteBug", "Home", new { deleteId = item.ID})">Delete</a>
+                                        @*@Html.ActionLink("DeleteForm", "Home", new { id = item.FormId }, new { @class="btn btn-primary"})*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                                    <!-- Delete Modal -->
+                    }
+                    }             </tbody>
+            </table>
+            
+            <footer class="sticky-footer">
+                <div class="container">
+                    <div class="text-center">
+                        <small>Copyright © ZTBL 2017</small>
+                    </div>
+                </div>
+            </footer>
+            <a class="scroll-to-top rounded" href="#page-top">
+                <i class="fa fa-angle-up"></i>
+            </a>
+            <!-- Logout Modal-->
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-Content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                        <div class="modal-footer">
+                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                            <a class="btn btn-primary" href="@Url.Action("Logout","Home")">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Bootstrap core JavaScript-->
+
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,282 @@
+﻿@model ZTBL_VersionReleaseFormAutomation.Models.UATForm
+
+@using System.Web.Optimization
+@using System.Collections.Generic
+
+@{
+    ViewBag.Title = "BugReport";
+}
+
+<html lang="en">
+
+<head>
+
+    <link href="https://fonts.googleapis.com/css?family=Raleway:500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Poiret+One" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SB Admin - Start Bootstrap Template</title>
+    <!-- Bootstrap core CSS-->
+    <link href="~/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    @Styles.Render("~/Content/vendor/bootstrap/css/bootstrap.min.css")
+    <!-- Custom fonts for this template-->
+    <link href="~/Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">*
+    @Styles.Render("~/Content/vendor/font-awesome/css/font-awesome.min.css")
+    <!-- Page level plugin CSS-->
+    <link href="~/Content/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    @Styles.Render("~/Content/vendor/datatables/dataTables.bootstrap4.css")
+    <!-- Custom styles for this template-->
+    <link href="~/Content/css/sb-admin.css" rel="stylesheet">
+    @Styles.Render("~/Content/css/sb-admin.css")
+
+
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/popper/popper.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="~/Content/vendor/chart.js/Chart.min.js"></script>
+    <script src="~/Content/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="~/Content/js/sb-admin.min.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="~/Content/js/sb-admin-datatables.min.js"></script>
+    <script src="~/Content/js/sb-admin-charts.min.js"></script>
+
+    
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <img src="~/Content/logoztbl.jpg" height="50px" width="28px" style="border-radius:3px" />&nbsp;&nbsp;&nbsp;<a class="navbar-brand" href="@Url.Action("Dashboard","Home")">Version Release</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="@Url.Action("Dashboard","Home")">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Dashboard</span>
+                    </a>
+                </li>
+                
+                @if ((ViewBag.UserRole).Contains("SDD") == true)
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="CreateNewForm">
+                        <a class="nav-link" href="@Url.Action("CreateNewVersionRelease","Home")">
+                            <i class="fa fa-fw fa-book"></i>
+                            <span class="nav-link-text">Create New Form</span>
+                        </a>
+                    </li>
+                }
+                @if ((ViewBag.UserRole).Contains("QA") == true)
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="CreateNewForm">
+                        <a class="nav-link" href="@Url.Action("CreateBugReport","Home")">
+                            <i class="fa fa-fw fa-book"></i>
+                            <span class="nav-link-text">Create Bug Report</span>
+                        </a>
+                    </li>
+                }
+                
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="BugReports">
+                    <a class="nav-link" href="@Url.Action("BugReport","Home")">
+                        <i class="fa fa-fw fa-chain-broken"></i>
+                        <span class="nav-link-text">Bug Reports</span>
+                    </a>
+                </li>
+
+
+                @if (ViewBag.UserType == "Admin")
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+                            <i class="fa fa-fw fa-table"></i>
+                            <span class="nav-link-text">Admin Panel</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="collapseComponents">
+                            <li>
+                                <a href="@Url.Action("AdminPanel","Home")">See Users</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Register","Home")">Add New Users</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ManageProject","Home")">Manage Projects</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+
+                
+            </ul>
+            <ul class="navbar-nav sidenav-toggler">
+               
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0 mr-lg-2">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </li>
+                <li>
+                    <p style="color:white;padding-top:7px">@ViewBag.Username, @ViewBag.UserRole </p>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-fw fa-sign-out"></i>Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="Content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <p style="font-size:35px;color:darkgreen"><b>User Acceptance Forms</b></p>
+            <br />
+
+            <center><a class="btn btn-dark" style="color:white" href="CreateUserAcceptanceForm" >Create new UAT Form</a></center><br />
+
+            <div class="card mb-3">
+                <div class="card-header">
+                    <i class="fa fa-table"></i> <b style="color:darkgreen">User Acceptance Forms</b>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table style="background-color:darkcyan; color: #f9f9f9; font-family: 'Raleway', sans-serif; " class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+
+                            <thead>
+                                <tr>
+                                    <th>
+                                        S No.
+                                    </th>
+                                    @*<th>
+                                        @Html.DisplayNameFor(model => model.Bug_Report_ID)
+                                    </th>*@
+                                    <th>
+                                        @Html.DisplayName("Project Name")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Version")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Date")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Actions")
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int i = 0;
+                                foreach (var item in (IEnumerable<ZTBL_VersionReleaseFormAutomation.Models.UATForm>)ViewBag.UAForms)
+                                {
+                                    ++i;
+                                    //onclick="@("window.location.href='" + @Url.Action("FormPage", "Home", new { fid = item.FormId }) + "'");"
+                                    <tr class="unread">                                        
+                                        <td class="view-message  dont-show">i.ToString()</td>
+                                        @*<td class="view-message dont-show"> @Html.DisplayFor(modelItem => item.Bug_Report_ID)</td>*@
+                                        @*<td class="view-message dont-show">@Html.DisplayName("BR-"+item.ProjectName+"")</td>*@
+                                        <td class="view-message dont-show"> @Html.DisplayFor(modelItem => item.ProjectName)</td>
+                                        <td class="view-message  inbox-small-cells">@Html.DisplayFor(modelItem => item.Version)</td>
+                                        <td class="view-message  dont-show">@Html.DisplayFor(modelItem => item.Date)</td>
+                                        <td class="view-message  dont-show">
+                                            <a href="ViewUserAcceptanceForm?Uid=@item.Id" style="color:white">View</a> |
+                                            <a href="@item.Id" style="color:white">Send</a> |
+                                            <a class=" btn btn-danger" data-target="#exampleModal_@item.Id" style="cursor:hand" data-toggle="modal">Delete</a>
+                                            @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal4" data-whatever="@Url.Action("DeleteForm","Home")">Delete </button>*@
+                                        </td>
+                                    </tr>
+                                
+                                    <!-- Delete Modal -->
+                                    <div class="modal fade" id="exampleModal_@item.Id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-Content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel2">Are you sure?</h5>
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">Select "Delete" below if you are sure to delete this form.</div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                    <a class="btn btn-primary" href="@Url.Action("", "Home", new { delete = item.Id })">Delete</a>
+                                                    @*@Html.ActionLink("DeleteForm", "Home", new { id = item.FormId }, new { @class="btn btn-primary"})*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Delete Modal -->
+                                }}
+                            </tbody>
+                        </table>
+
+
+                        
+
+                    </div>
+                </div>
+
+                
+
+                <div class="row">
+                    <div class="col-lg-8">
+                        <hr class="mt-2">
+                    </div>
+                    <div class="col-lg-4">
+                    </div>
+                </div>
+            </div>
+        <footer class="sticky-footer">
+            <div class="container">
+                <div class="text-center">
+                    <small>Copyright © ZTBL 2017</small>
+                </div>
+            </div>
+        </footer>
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-Content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="@Url.Action("Logout","Home")">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript-->
+
+    </div>
+</div></body>
+
+</html>
+

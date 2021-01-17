@@ -1,0 +1,222 @@
+﻿@model ZTBL_VersionReleaseFormAutomation.Models.BugReport
+@using System.Collections.Generic;
+@using System.Web.Optimization;
+@{
+    Layout = null;
+}
+
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SB Admin - Start Bootstrap Template</title>
+    <!-- Bootstrap core CSS-->
+    <link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Old+Standard+TT" rel="stylesheet">
+    <link href="~/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    @Styles.Render("~/Content/vendor/bootstrap/css/bootstrap.min.css")
+    <!-- Custom fonts for this template-->
+    <link href="~/Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">*
+    @Styles.Render("~/Content/vendor/font-awesome/css/font-awesome.min.css")t
+    <!-- Page level plugin CSS-->
+    <link href="~/Content/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    @Styles.Render("~/Content/vendor/datatables/dataTables.bootstrap4.css")
+    <!-- Custom styles for this template-->
+    <link href="~/Content/css/sb-admin.css" rel="stylesheet">
+    @Styles.Render("~/Content/css/sb-admin.css")
+
+    
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/popper/popper.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="~/Content/vendor/chart.js/Chart.min.js"></script>
+    <script src="~/Content/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="~/Content/js/sb-admin.min.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="~/Content/js/sb-admin-datatables.min.js"></script>
+    <script src="~/Content/js/sb-admin-charts.min.js"></script>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <img src="~/Content/logoztbl.jpg" height="50px" width="28px" style="border-radius:3px" />&nbsp;&nbsp;&nbsp;<a class="navbar-brand" href="@Url.Action("Dashboard","Home")">Version Release</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="@Url.Action("Dashboard","Home")">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Dashboard</span>
+                    </a>
+                </li>
+                
+                @if ((ViewBag.UserRole).Contains("SDD") == true)
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="CreateNewForm">
+                        <a class="nav-link" href="@Url.Action("CreateNewVersionRelease","Home")">
+                            <i class="fa fa-fw fa-book"></i>
+                            <span class="nav-link-text">Create New Form</span>
+                        </a>
+                    </li>
+                }
+                @if ((ViewBag.UserRole).Contains("QA") == true)
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="CreateNewForm">
+                        <a class="nav-link" href="@Url.Action("CreateBugReport","Home")">
+                            <i class="fa fa-fw fa-book"></i>
+                            <span class="nav-link-text">Create Bug Report</span>
+                        </a>
+                    </li>
+                }
+
+                
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="BugReports">
+                    <a class="nav-link" href="@Url.Action("BugReport","Home")">
+                        <i class="fa fa-fw fa-chain-broken"></i>
+                        <span class="nav-link-text">Bug Reports</span>
+                    </a>
+                </li>
+
+
+                @if (ViewBag.UserType == "Admin")
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+                            <i class="fa fa-fw fa-table"></i>
+                            <span class="nav-link-text">Admin Panel</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="collapseComponents">
+                            <li>
+                                <a href="@Url.Action("AdminPanel","Home")">See Users</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Register","Home")">Add New Users</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ManageProject","Home")">Manage Projects</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+
+                
+            </ul>
+            <ul class="navbar-nav sidenav-toggler">
+                
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0 mr-lg-2">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </li>
+                <li>
+
+                    <p style="color:white;padding-top:7px">@ViewBag.Username, @ViewBag.UserRole </p>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-fw fa-sign-out"></i>Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="Content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+            <p style="font-size:35px;color:maroon"><b>Create Bug Report</b></p>
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <hr class="mt-2">
+                </div>
+                <div class="col-lg-4">
+                </div>
+            </div>
+            <!-- Example DataTables Card-->
+            <div style="width:50%">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    @*@Html.LabelFor(l => l.Bug_Report_ID) @Html.TextBoxFor(l => l.Bug_Report_ID, new { @class="form-control",style="width:250px",placeholder="Enter ID",required="required"})*@
+                    <br />
+                    @*@Html.LabelFor(l => l.FormId) @Html.TextBoxFor(l => l.FormId, new { @class = "form-control",type ="number", @min="1" })
+                    <br />*@
+                     @*@Html.Label("Form") <br />@Html.DropDownListFor(l => l.FormId, new SelectList(@ViewBag.formsAvailable), "Select Form", new { @class = "form-control", style="width:110px;padding:0px;border-radius=0",required = "required" })*@
+                     @Html.Label("Form") <br />@Html.DropDownListFor(l => l.FormId,(IEnumerable<SelectListItem>)ViewBag.formsAvailable,"Select Form", new { @class = "form-control", style="width:250px;padding:0px;border-radius=0",required = "required" })
+                    
+                    <br />
+                    @*@Html.LabelFor(l => l.ProjectID) @Html.TextBoxFor(l => l.ProjectID, new { @class = "form-control", type = "number", @min = "1", required = "required" })*@
+                    @*<br />*@
+                    @*@Html.LabelFor(l => l.ProjectName) @Html.TextBoxFor(l => l.ProjectName, new { @class = "form-control", type = "text", required = "required" })*@
+                    @*<br />*@
+                    @*@Html.LabelFor(l => l.Version_Release) @Html.TextBoxFor(l => l.Version_Release, new { @class = "form-control", type = "number", @min = "1", @step = "0.1", required = "required" })*@
+                    @*<br />*@
+                    @Html.Label("Testing Type") @Html.TextBoxFor(l => l.TestingType, new { @class = "form-control",placeholder="Enter Type", type = "text", style = "width:250px", required = "required" })
+                    <br />
+                    @Html.Label("Tester Name") @Html.TextBoxFor(l => l.TesterName, new { @class = "form-control", type = "text", placeholder="Enter Name",style = "width:250px", required = "required" })
+                    <br />
+                    @Html.Label("Testing Cycle") @Html.TextBoxFor(l => l.TestingCycle, new { @class = "form-control", type = "number",placeholder="Enter Number", style = "width:140px", @min = "1", @max = "99", required = "required" })
+                    <br />
+                    @Html.Label("Reviewer") @Html.TextBoxFor(l => l.Reviewer, new { @class = "form-control", type = "text",placeholder="Enter Reviewer's Name ", style = "width:250px", required = "required" })
+                    <br />
+
+    <input type="submit" value="Create" class="btn btn-outline-success"  />
+                }
+            </div>
+
+        </div>
+        <footer class="sticky-footer">
+            <div class="container">
+                <div class="text-center">
+                    <small>Copyright © ZTBL 2017</small>
+                </div>
+            </div>
+        </footer>
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-Content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="@Url.Action("Logout","Home")">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript-->
+
+    </div>
+</body>
+
+</html>

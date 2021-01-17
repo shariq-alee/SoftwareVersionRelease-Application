@@ -1,0 +1,1099 @@
+﻿@model ZTBL_VersionReleaseFormAutomation.Models.FormData
+@using System.Web.Optimization;
+@using System.Collections.Generic;
+
+@{
+    Layout = null;
+}
+
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SB Admin - Start Bootstrap Template</title>
+    <!-- Bootstrap core CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.3.0/paper.css">
+    <link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Old+Standard+TT" rel="stylesheet">
+    <link href="~/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    @Styles.Render("~/Content/vendor/bootstrap/css/bootstrap.min.css")
+
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/bootstrap/css/custom.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/vendor/bootstrap/css/animate.css">
+    <!-- Custom fonts for this template-->
+    <link href="~/Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">*
+    @Styles.Render("~/Content/vendor/font-awesome/css/font-awesome.min.css")
+    <!-- Page level plugin CSS-->
+    <link href="~/Content/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    @Styles.Render("~/Content/vendor/datatables/dataTables.bootstrap4.css")
+    <!-- Custom styles for this template-->
+    <link href="~/Content/css/sb-admin.css" rel="stylesheet">
+    @Styles.Render("~/Content/css/sb-admin.css")
+    @Styles.Render("~/Content/css/pageLayout.css")
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/popper/popper.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="~/Content/vendor/chart.js/Chart.min.js"></script>
+    <script src="~/Content/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="~/Content/js/sb-admin.min.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="~/Content/js/sb-admin-datatables.min.js"></script>
+    <script src="~/Content/js/sb-admin-charts.min.js"></script>
+    <script type="text/javascript">
+
+
+        window.setInterval(function () {
+        //    call your function here
+      
+            var name = document.getElementById('nam').innerHTML;
+            var deg = name.substring(name.indexOf(','), name.length);
+
+            name = name.substring(0, name.indexOf(','));
+            var selector;
+            if (deg.match(/Team/)&&(deg.match(/SDD/))) {
+                selector = 'tlsdd';
+                //document.getElementById("dtesdd").valueAsDate = new Date();
+            }
+            else if (deg.match(/Developer/)&&deg.match(/SDD/)) {
+                selector = 'ldsdd';
+                //document.getElementById("dtesdd").valueAsDate = new Date();
+            }
+            else if(deg.match(/Manager/)&&deg.match(/SDD/)){
+                selector = 'dhsdd';
+                //document.getElementById("dtesdd").valueAsDate = new Date();
+            }
+            else if (deg.match(/Team/) && deg.match(/QA/)) {
+                selector = 'tlqa';
+                //document.getElementById("dteqa").valueAsDate = new Date();
+
+            }
+            else if (deg.match(/Manager/) && deg.match(/QA/)) {
+                selector = 'dhqa';
+                //document.getElementById("dteqa").valueAsDate = new Date();
+
+            }
+            else if (deg.match(/Team/) && deg.match(/Operations/)) {
+                selector = 'tlop';
+                //document.getElementById("dteop").valueAsDate = new Date();
+            }
+            else if (deg.match(/Manager/) && deg.match(/Operations/)) {
+                selector = 'dhop';
+                //document.getElementById("dteop").valueAsDate = new Date();
+            }
+            document.getElementById(selector).value = name;
+        }, 1);
+
+        function submitFormFunction(identity) {
+            var form = document.getElementById("sbmtform");
+            form.submit();     
+        }
+
+        function printout() {
+
+            var newWindow = window.open();
+            newWindow.document.write()
+            var dd = document.getElementById("ReportHeader1");
+            dd.style.display = "block";
+            document.getElementById("savebutton").style.display = "none";
+            newWindow.pageXOffset = "29.7cm";
+            newWindow.pageYOffset = "42.0cm";
+            
+            newWindow.document.write(document.getElementById("ReportHeader1").innerHTML);
+            newWindow.document.write(document.getElementById("sbmtform").innerHTML);
+            var zz = document.getElementById("IFGenerated");
+            var yy = document.getElementById("RFLGenerated");
+
+            zz.style.display = "block";
+            yy.style.display = "block";
+            newWindow.document.write("<br>");
+            newWindow.document.write(document.getElementById("IFGenerated").innerHTML);
+            newWindow.document.write(document.getElementById("RFLGenerated").innerHTML);
+            yy.style.display = "none";
+            zz.style.display = "none";
+            dd.style.display = "none";
+            document.getElementById("savebutton").style.display = "block";
+            newWindow.alert("Note:\nSet Paper Size to A3 for best Results.");
+            newWindow.print();
+
+        }
+
+    </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('input[type=text]').addClass('tbn');
+            $('input[type=date]').addClass('tbn');
+            $('input[type=text]').attr('maxlength', '50');
+            $('input[type=number]').attr('maxlength', '20');
+
+        })
+
+    </script>
+
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <img src="~/Content/logoztbl.jpg" height="50px" width="28px" style="border-radius:3px" />&nbsp;&nbsp;&nbsp;<a class="navbar-brand" href="@Url.Action("Dashboard","Home")">Version Release</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="@Url.Action("Dashboard","Home")">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Dashboard</span>
+                    </a>
+                </li>
+                
+                @if ((ViewBag.UserRole).Contains("SDD") == true)
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="CreateNewForm">
+                        <a class="nav-link" href="@Url.Action("CreateNewVersionRelease","Home")">
+                            <i class="fa fa-fw fa-book"></i>
+                            <span class="nav-link-text">Create New Form</span>
+                        </a>
+                    </li>
+                }
+                @if ((ViewBag.UserRole).Contains("QA") == true)
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="CreateNewForm">
+                        <a class="nav-link" href="@Url.Action("CreateBugReport","Home")">
+                            <i class="fa fa-fw fa-book"></i>
+                            <span class="nav-link-text">Create Bug Report</span>
+                        </a>
+                    </li>
+                }
+                
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="BugReports">
+                    <a class="nav-link" href="@Url.Action("BugReport","Home")">
+                        <i class="fa fa-fw fa-chain-broken"></i>
+                        <span class="nav-link-text">Bug Reports</span>
+                    </a>
+                </li>
+
+
+                @if (ViewBag.UserType == "Admin")
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+                            <i class="fa fa-fw fa-table"></i>
+                            <span class="nav-link-text">Admin Panel</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="collapseComponents">
+                            <li>
+                                <a href="@Url.Action("AdminPanel","Home")">See Users</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Register","Home")">Add New Users</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ManageProject","Home")">Manage Projects</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                                
+            </ul>
+            <ul class="navbar-nav sidenav-toggler">
+                
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0 mr-lg-2">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </li>
+                <li>
+
+                    <p style="color:white;padding-top:7px" id="nam">@ViewBag.Username, @ViewBag.UserRole </p>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-fw fa-sign-out"></i>Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="Content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+                
+            <div style="display:table;width:100%;border:solid;padding-left:10px" id="ReportHeader">
+                <div style="display: table-cell; width: 20%; border:thick;"><img src="~/Content/logoztbl.jpg" width="50px" height="65px" /></div>
+                <div style="display: table-cell; padding-left: 130px; width: 80%;border:thick;" class="animated fadeIn"  ><legend><b style="color:maroon;">Version Release Form</b></legend></div>
+            </div>
+            
+            <div style="display:none;width:100%;border:solid;padding-left:10px" id="ReportHeader1">
+                <div style="display:table; width:100%;outline:solid;margin-bottom:5px">
+                    <div style="display: table-cell; padding-left:5px; width: 20%; border: thick;"><img src="~/Content/logoztbl.jpg" width="50px" height="65px" /></div>
+                    <div style="display: table-cell; padding-left: 180px; padding: 7px; width: 80%; border: thick;"><b style="font-size:25px;margin-left:15%">Version Release Form</b></div>
+                </div>
+            </div>
+            
+            
+            <div class="row">
+                <div class="col-lg-8">
+                    <hr class="mt-2">
+                </div>
+                <div class="col-lg-4">
+                </div>
+            </div>
+            <!-- Example DataTables Card-->
+            
+            @*@Html.ActionLink("Export as PDF", "GetPdf")*@
+<div style="width:100%">
+    <a onclick="printout()" style="text-align:right;cursor:pointer;color:blue">Print/Export as PDF</a>
+    
+</div>
+            
+                @using (Html.BeginForm(null, null, FormMethod.Post, new { id = "sbmtform"}))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <fieldset style="outline: solid; font-family: 'Didact Gothic', sans-serif; padding: 10px; margin: 0px;">
+
+                        <div style="display:table;width:100%;height:15px;">
+                            <div style="display:table-cell"><p style="text-align:left"><b>Project Name: </b><u>@ViewBag.projectInfo.ProjectName</u></p></div>
+                            <div style="display:table-cell"><p style="text-align:right"><b>Version No: </b><u>@ViewBag.projectInfo.VersionNo</u></p></div>
+                        </div>
+
+                        <div style="display: table; width: 100%; height: 15px;">
+                            <div style="display:table-cell"><p style="text-align:center"> <p style="text-align:left"><b>Version Description: </b><u>@ViewBag.projectInfo.VersionDescription</u></p></div>
+                            <div style="display:table-cell"><p style="text-align:center"><p style="text-align:right"><b>Version Date: </b><u>@ViewBag.projectInfo.VersionDate</u></p></div>
+                        </div>
+
+                        <div style="display:table;width:100%;height:10px;text-align:center">
+                            <div style="display:table-cell"><b>@Html.CheckBox("NewProduct", @ViewBag.projectInfo.Type == "NewProduct" ? new { @checked = "checked", @disabled = "disabled" } : (object)new { @disabled = "disabled" }) New Product</b></div>
+                            <div style="display:table-cell"><b>@Html.CheckBox("BugFix", @ViewBag.projectInfo.Type == "BugFix" ? new { @checked = "checked", @disabled = "disabled" } : (object)new { @disabled = "disabled" }) Bug Fix</b></div>
+                            <div style="display:table-cell"><b>@Html.CheckBox("Enhancement", @ViewBag.projectInfo.Type == "Enhancement" ? new { @checked = "checked", @disabled = "disabled" } : (object)new { @disabled = "disabled" }) Enhancement</b></div>
+                        </div>
+                        <p style="text-align:center">
+
+
+                        </p><div>
+                            <!--   Check Application -->
+                            <h3><u>Part 1: Development Activities</u></h3>
+                            <div class="form-group" style="padding:10px">
+
+                                @if (ViewBag.fetchf.SFLandRFLisAttached == true)
+                                {
+                                    @*@Html.CheckBoxFor(f => f.SFLandRFLisAttached, new { @checked = "checked" })*@
+                                    @Html.CheckBoxFor(f => f.SFLandRFLisAttached, (ViewBag.UserRole).Contains("SDD") ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+                                }
+                                else
+                                {
+                                    @*@Html.CheckBoxFor(f => f.SFLandRFLisAttached)*@
+                                    @Html.CheckBoxFor(f => f.SFLandRFLisAttached, (ViewBag.UserRole).Contains("SDD") ? new { } : (object)new { @disabled = "disabled" })
+
+                                }
+                                "Software Feature List" and "Released Files List" is attached.<br />
+
+                                @if (ViewBag.fetchf.CpybaselineProvided == true)
+                                {
+                                    @*@Html.CheckBoxFor(f => f.CpybaselineProvided, new { @checked = "checked" })*@
+                                    @Html.CheckBoxFor(f => f.CpybaselineProvided, (ViewBag.UserRole).Contains("SDD") ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+                                }
+                                else
+                                {
+                                    @*@Html.CheckBoxFor(f => f.CpybaselineProvided)*@
+                                    @Html.CheckBoxFor(f => f.CpybaselineProvided, (ViewBag.UserRole).Contains("SDD") ? new { } : (object)new { @disabled = "disabled" })
+
+                                }
+                                Copy of baseline document (i.e. RSD, User Request etc) is provided.<br />
+
+                                @if (ViewBag.fetchf.RelFoldersLabeled == true)
+                                {
+                                    @*@Html.CheckBoxFor(f => f.RelFoldersLabeled, new { @checked = "checked" })*@
+                                    @Html.CheckBoxFor(f => f.RelFoldersLabeled, (ViewBag.UserRole).Contains("SDD") ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+                                }
+                                else
+                                {
+                                    @*@Html.CheckBoxFor(f => f.RelFoldersLabeled)*@
+                                    @Html.CheckBoxFor(f => f.RelFoldersLabeled, (ViewBag.UserRole).Contains("SDD") ? new { } : (object)new { @disabled = "disabled" })
+                                }
+                                Released related folders/files have been labeled in VSS. ( VSS Label):
+                                @Html.TextBoxFor(f => f.VSSLabel, (ViewBag.UserRole).Contains("SDD") ? new { style = "height:19px", @Value = @ViewBag.fetchf.VSSLabel } : (object)new { style = "height:19px", @Value = @ViewBag.fetchf.VSSLabel, @disabled = "disabled" })<br />
+
+
+                                @if (ViewBag.fetchf.RelFilesPlaced == true)
+                                {
+                                    @*@Html.CheckBoxFor(f => f.RelFilesPlaced, new { @checked = "checked" })*@
+                                    @Html.CheckBoxFor(f => f.RelFilesPlaced, (ViewBag.UserRole).Contains("SDD") ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+                                }
+                                else
+                                {
+                                    @*@Html.CheckBoxFor(f => f.RelFilesPlaced)*@
+                                    @Html.CheckBoxFor(f => f.RelFilesPlaced, (ViewBag.UserRole).Contains("SDD") ? new { } : (object)new { @disabled = "disabled" })
+                                }
+                                The Released Files are placed at location <u>\\CMS\Deployment-SDD\</u>
+                                @Html.TextBoxFor(f => f.RelFilesLocation, (ViewBag.UserRole).Contains("SDD") ? new { @Value = @ViewBag.fetchf.RelFilesLocation,style="height:19px" } : (object)new { @Value = @ViewBag.fetchf.RelFilesLocation,style="height:19px",@disabled = "disabled" }) <br />
+
+                                @if (ViewBag.fetchf.UnitTestingDone == true)
+                                {
+                                    @*@Html.CheckBoxFor(f => f.UnitTestingDone, new { @checked = "checked" })*@
+                                    @Html.CheckBoxFor(f => f.UnitTestingDone, (ViewBag.UserRole).Contains("SDD") ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+                                }
+                                else
+                                {
+                                    @*@Html.CheckBoxFor(f => f.UnitTestingDone)*@
+                                    @Html.CheckBoxFor(f => f.UnitTestingDone, (ViewBag.UserRole).Contains("SDD") ? new { } : (object)new { @disabled = "disabled" })
+
+                                }
+                                Unit Testing Done. <br />
+
+                                @if (ViewBag.fetchf.CodingStdFollowed == true)
+                                {
+                                    @*@Html.CheckBoxFor(f => f.CodingStdFollowed, new { @checked = "checked" })*@
+                                    @Html.CheckBoxFor(f => f.CodingStdFollowed, (ViewBag.UserRole).Contains("SDD") ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+                                }
+                                else
+                                {
+                                    @*@Html.CheckBoxFor(f => f.CodingStdFollowed)*@
+                                    @Html.CheckBoxFor(f => f.CodingStdFollowed, (ViewBag.UserRole).Contains("SDD") ? new { } : (object)new { @disabled = "disabled" })
+
+                                }
+                                Coding Guidelines/standards followed.<br />
+
+                                @if (ViewBag.fetchf.PeerReview == true)
+                                {
+                                    @*@Html.CheckBoxFor(f => f.PeerReview, new { @checked = "checked" })*@
+                                    @Html.CheckBoxFor(f => f.PeerReview, (ViewBag.UserRole).Contains("QA") ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+                                }
+                                else
+                                {
+                                    @*@Html.CheckBoxFor(f => f.PeerReview)*@
+                                    @Html.CheckBoxFor(f => f.PeerReview, (ViewBag.UserRole).Contains("QA") ? new { } : (object)new { @disabled = "disabled" })
+
+                                }
+                                Peer Review(s) [ @Html.RadioButtonFor(f => f.PeerReviewValues, "Conducted", ((ViewBag.UserRole).Contains("QA")) ? (@ViewBag.fetchf.PeerReviewValues == "Conducted" ? new { @checked = "checked" } : null) : (@ViewBag.fetchf.PeerReviewValues == "Conducted" ? new { @checked = "checked", @disabled = "disabled" } : (object)new { @disabled = "disabled" }))Conducted        @Html.RadioButtonFor(f => f.PeerReviewValues, "Not Required", ((ViewBag.UserRole).Contains("QA")) ? (@ViewBag.fetchf.PeerReviewValues == "Not Required" ? new { @checked = "checked" } : null) : (@ViewBag.fetchf.PeerReviewValues == "Not Required" ? new { @checked = "checked", @disabled = "disabled" } : (object)new { @disabled = "disabled" }))Not Required  ]
+                                <br />
+
+
+
+                                <b>Comments:</b><br />
+                                <div style="width:100%;display:table">
+                                    <div style="display:table-cell">
+                                        <center><b><u>Lead Developer</u></b> </center>         <br />
+                                        <center>
+                                            @if (ViewBag.fetchf.LeadDeveloperSign_SDD == true)
+                                            {
+                                                @*@Html.CheckBoxFor(f => f.LeadDeveloperSign_SDD, new { @checked = "checked" })*@
+                                                @Html.CheckBoxFor(f => f.LeadDeveloperSign_SDD, ((ViewBag.UserRole).Contains("SDD") && ((ViewBag.UserRole).Contains("Lead Developer"))) ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+
+                                            }
+                                            else
+                                            {
+                                                @*@Html.CheckBoxFor(f => f.LeadDeveloperSign_SDD)*@
+                                                @Html.CheckBoxFor(f => f.LeadDeveloperSign_SDD, ((ViewBag.UserRole).Contains("SDD") && ((ViewBag.UserRole).Contains("Lead Developer"))) ? new { } : (object)new { @disabled = "disabled" })
+
+                                            }
+                                            Lead Developer Sign. <br />
+                                            @Html.TextBoxFor(f => f.LeadDeveloperName_SDD, (ViewBag.UserRole).Contains("SDD") && ((ViewBag.UserRole).Contains("Lead Developer")) ? new { id = "ldsdd", placeholder = "Name (Lead Developer)", @Value = @ViewBag.fetchf.LeadDeveloperName_SDD } : (object)new { id = "ldsdd", placeholder = "Name (Lead Developer)", @Value = @ViewBag.fetchf.LeadDeveloperName_SDD, @disabled = "disabled" })
+                                        </center>
+                                    </div>
+                                    <div style="display:table-cell">
+                                        <center><b><u>Unit Incharge</u></b>  </center>        <br />
+                                        <center>
+                                            @if (ViewBag.fetchf.UnitInchargeSign_SDD == true)
+                                            {
+                                                @*@Html.CheckBoxFor(f => f.UnitInchargeSign_SDD, new { @checked = "checked", @disabled = "disabled" })*@
+                                                @Html.CheckBoxFor(f => f.UnitInchargeSign_SDD, ((ViewBag.UserRole).Contains("SDD") && ((ViewBag.UserRole).Contains("Team Lead"))) ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+
+                                            }
+                                            else
+                                            {
+                                                @*@Html.CheckBoxFor(f => f.UnitInchargeSign_SDD)*@
+                                                @Html.CheckBoxFor(f => f.UnitInchargeSign_SDD, ((ViewBag.UserRole).Contains("SDD") && ((ViewBag.UserRole).Contains("Team Lead"))) ? new { } : (object)new { @disabled = "disabled" })
+
+                                            } Unit Incharge Sign. <br />
+
+                                            @Html.TextBoxFor(f => f.UnitInchargeName_SDD, ((ViewBag.UserRole).Contains("SDD") && ((ViewBag.UserRole).Contains("Team Lead"))) ? new { id = "tlsdd", placeholder = "Name (Unit Incharge)", @Value = @ViewBag.fetchf.UnitInchargeName_SDD } : (object)new { id = "tlsdd", placeholder = "Name (Unit Incharge)", @Value = @ViewBag.fetchf.UnitInchargeName_SDD, @disabled = "disabled" })
+                                        </center>
+
+                                    </div>
+
+                                    <div style="display:table-cell">
+                                        <center><b><u>Department Head</u></b></center>          <br />
+                                        <center>
+                                            @if (ViewBag.fetchf.DepartmentHeadSign_SDD == true)
+                                            {
+                                                @*@Html.CheckBoxFor(f => f.DepartmentHeadSign_SDD, new { @checked = "checked" })*@
+                                                @Html.CheckBoxFor(f => f.DepartmentHeadSign_SDD, ((ViewBag.UserRole).Contains("SDD") && ((ViewBag.UserRole).Contains("Manager"))) ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+
+                                            }
+                                            else
+                                            {
+                                                @*@Html.CheckBoxFor(f => f.DepartmentHeadSign_SDD)*@
+                                                @Html.CheckBoxFor(f => f.DepartmentHeadSign_SDD, ((ViewBag.UserRole).Contains("SDD") && ((ViewBag.UserRole).Contains("Manager"))) ? new { } : (object)new { @disabled = "disabled" })
+                                            } Department Head Sign. <br />
+
+                                            @Html.TextBoxFor(f => f.DepartmentHeadName_SDD, ((ViewBag.UserRole).Contains("SDD") && ((ViewBag.UserRole).Contains("Manager"))) ? new { id = "dhsdd", placeholder = "Name (Department Head)", @Value = @ViewBag.fetchf.DepartmentHeadName_SDD } : (object)new { id = "dhsdd", placeholder = "Name (Department Head)", @Value = @ViewBag.fetchf.DepartmentHeadName_SDD, @disabled = "disabled" })
+                                        </center>
+                                    </div>
+
+                                </div>
+                                <br />
+
+                                <b>Date:</b>  @Html.TextBoxFor(f => f.DateAndTime_SDD, (ViewBag.UserRole).Contains("SDD") ? new { id = "dtesdd", type = "date", @Value = ViewBag.fetchf.DateAndTime_SDD } : (object)new { id = "dtesdd", @disabled = "disabled", type = "date", @Value = ViewBag.fetchf.DateAndTime_SDD })
+                                @*<input type="date" placeholder="@DateTime.Now.ToString("yyyy-mm-dd")" /><br />*@
+                                @*@if((ViewBag.UserRole).Contains("QA"))*@
+
+                                <fieldset style="outline:double; padding:10px;margin:10px">
+
+                                    <legend>Configuration and Controlling Activities</legend>
+
+                                    @if (ViewBag.fetchf.C_CCA_ChecklistChecked_SDD == true)
+                                    {
+                                        @*@Html.CheckBoxFor(f => f.C_CCA_ChecklistChecked_SDD, new { @checked = "checked" })*@
+                                        @Html.CheckBoxFor(f => f.C_CCA_ChecklistChecked_SDD, (ViewBag.UserRole).Contains("QA") ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+
+                                    }
+                                    else
+                                    {
+                                        @*@Html.CheckBoxFor(f => f.C_CCA_ChecklistChecked_SDD)*@
+                                        @Html.CheckBoxFor(f => f.C_CCA_ChecklistChecked_SDD, (ViewBag.UserRole).Contains("QA") ? new { } : (object)new { @disabled = "disabled" })
+
+                                    }
+                                    Part-I checklist checked and confirmed<br />
+
+                                    @if (ViewBag.fetchf.C_CCA_RelFilesMovedOrNot_SDD == true)
+                                    {
+                                        @*@Html.CheckBoxFor(f => f.C_CCA_RelFilesMovedOrNot_SDD, new { @checked = "checked" })*@
+                                        @Html.CheckBoxFor(f => f.C_CCA_RelFilesMovedOrNot_SDD, (ViewBag.UserRole).Contains("QA") ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+
+                                    }
+                                    else
+                                    {
+                                        @*@Html.CheckBoxFor(f => f.C_CCA_RelFilesMovedOrNot_SDD)*@
+                                        @Html.CheckBoxFor(f => f.C_CCA_RelFilesMovedOrNot_SDD, (ViewBag.UserRole).Contains("QA") ? new { } : (object)new { @disabled = "disabled" })
+
+                                    }
+                                    Released Files moved to <u>\\CMS\Deployment-QAD\</u>
+                                    @Html.TextBoxFor(f => f.C_CCA_RelFilesMovedToLoc_SDD, (ViewBag.UserRole).Contains("QA") ? new { @Value = @ViewBag.fetchf.C_CCA_RelFilesMovedToLoc_SDD } : (object)new { @Value = @ViewBag.fetchf.C_CCA_RelFilesMovedToLoc_SDD, @disabled = "disabled" })<br />
+
+                                    Date: @*<input type="date" placeholder="@DateTime.Now.ToString("yyyy-mm-dd") " />*@
+                                    @Html.TextBoxFor(f => f.C_CCA_DateAndTime_SDD, (ViewBag.UserRole).Contains("QA") ? new { @Value = @ViewBag.fetchf.C_CCA_DateAndTime_SDD, type = "date" } : (object)new { @Value = @ViewBag.fetchf.C_CCA_DateAndTime_SDD, type = "date", @disabled = "disabled" })
+
+                                </fieldset>
+
+                            </div>
+                            
+                            <!--   Check appliation-->
+                            <h3><u>Part 2: QA Activities</u></h3>
+                            <div class="form-group" style="padding:10px">
+
+                                @*@Html.ActionLink("Create Bug Report", "CreateBugReport", new { formIdBugReport = ViewBag.formId})*@
+
+                                @if (ViewBag.fetchf.DiscoveredBugsReported == true)
+                                {
+                                    @*@Html.CheckBoxFor(f => f.DiscoveredBugsReported, new { @checked = "checked" })*@
+                                    @Html.CheckBoxFor(f => f.DiscoveredBugsReported, (ViewBag.UserRole).Contains("QA") ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+                                }
+                                else
+                                {
+                                    @*@Html.CheckBoxFor(f => f.DiscoveredBugsReported)*@
+                                    @Html.CheckBoxFor(f => f.DiscoveredBugsReported, (ViewBag.UserRole).Contains("QA") ? new { } : (object)new { @disabled = "disabled" })
+
+                                }
+                                Discovered bugs have been reported vide bug Report No. @Html.TextBoxFor(f => f.DiscoveredBugsReportedRepNo, (ViewBag.UserRole).Contains("QA") ? new { style = "height:19px", @Value = @ViewBag.fetchf.DiscoveredBugsReportedRepNo } : (object)new { style = "height:19px", @Value = @ViewBag.fetchf.DiscoveredBugsReportedRepNo, @disabled = "disabled" })<br />
+                                @if (ViewBag.fetchf.QATeamSatisfied == true)
+                                {
+                                    @*@Html.CheckBoxFor(f => f.QATeamSatisfied, new { @checked = "checked" })*@
+                                    @Html.CheckBoxFor(f => f.QATeamSatisfied, (ViewBag.UserRole).Contains("QA") ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+                                }
+                                else
+                                {
+                                    @*@Html.CheckBoxFor(f => f.QATeamSatisfied)*@
+                                    @Html.CheckBoxFor(f => f.QATeamSatisfied, (ViewBag.UserRole).Contains("QA") ? new { } : (object)new { @disabled = "disabled" })
+
+                                }
+                                QA team satisfied with this release.<br />
+
+
+                                Software Stability: [        @Html.RadioButtonFor(f => f.SWStabilityComment_QA, "RequiresAnotherCycle", (@ViewBag.UserRole).Contains("QA") ? (@ViewBag.fetchf.SWStabilityComment_QA == "RequiresAnotherCycle" ? new { @checked = "checked" } : null) : @ViewBag.fetchf.SWStabilityComment_QA == "RequiresAnotherCycle" ? new { @checked = "checked", @disabled = "disabled" } : (object)new { @disabled = "disabled" }) Requires Another QA Cycle  @Html.RadioButtonFor(f => f.SWStabilityComment_QA, "Deployable", (@ViewBag.UserRole).Contains("QA") ? (@ViewBag.fetchf.SWStabilityComment_QA == "Deployable" ? new { @checked = "checked" } : null) : @ViewBag.fetchf.SWStabilityComment_QA == "Deployable" ? new { @checked = "checked", @disabled = "disabled" } : (object)new { @disabled = "disabled" })   Deployable ]
+                                <br />
+
+
+                                <b>Comments:</b><br />
+
+                                <div style="width:100%;display:table">
+                                    <div style="display:table-cell">
+                                        <center><b><u>QA Lead</u></b></center>          <br />    <center>
+                                            @if (ViewBag.fetchf.LeadSign_QA == true)
+                                            {
+                                                @*@Html.CheckBoxFor(f => f.LeadSign_QA, new { @checked = "checked" })*@
+                                                @Html.CheckBoxFor(f => f.LeadSign_QA, ((ViewBag.UserRole).Contains("QA") && ((ViewBag.UserRole).Contains("Team Lead"))) ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+                                            }
+                                            else
+                                            {
+                                                @*@Html.CheckBoxFor(f => f.LeadSign_QA)*@
+                                                @Html.CheckBoxFor(f => f.LeadSign_QA, ((ViewBag.UserRole).Contains("QA") && ((ViewBag.UserRole).Contains("Team Lead"))) ? new { } : (object)new { @disabled = "disabled" })
+                                            }
+                                            QA Lead Sign. <br />
+                                            @Html.TextBoxFor(f => f.LeadName_QA, ((ViewBag.UserRole).Contains("QA") && ((ViewBag.UserRole).Contains("Team Lead"))) ? new { id = "tlqa", placeholder = "Name (QA Lead)", @Value = @ViewBag.fetchf.LeadName_QA } : (object)new { id = "tlqa", placeholder = "Name (QA Lead)", @Value = @ViewBag.fetchf.LeadName_QA, @disabled = "disabled" })
+                                        </center>
+                                    </div>
+                                    <div style="display:table-cell">
+                                        <center><b><u>QA Manager</u></b></center>          <br />    <center>
+
+                                            @if (ViewBag.fetchf.ManagerSign_QA == true)
+                                            {
+                                                @*@Html.CheckBoxFor(f => f.ManagerSign_QA, new { @checked = "checked" })*@
+                                                @Html.CheckBoxFor(f => f.ManagerSign_QA, ((ViewBag.UserRole).Contains("QA") && ((ViewBag.UserRole).Contains("Manager"))) ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+
+                                            }
+                                            else
+                                            {
+                                                @*@Html.CheckBoxFor(f => f.ManagerSign_QA)*@
+                                                @Html.CheckBoxFor(f => f.ManagerSign_QA, ((ViewBag.UserRole).Contains("QA") && ((ViewBag.UserRole).Contains("Manager"))) ? new { } : (object)new { @disabled = "disabled" })
+
+                                            }QA Manager Sign. <br />
+                                            @Html.TextBoxFor(f => f.ManagerName_QA, ((ViewBag.UserRole).Contains("QA") && ((ViewBag.UserRole).Contains("Manager"))) ? new { id = "dhqa", placeholder = "Name (QA Manager)", @Value = @ViewBag.fetchf.ManagerName_QA } : (object)new { id = "dhqa", placeholder = "Name (QA Manager)", @Value = @ViewBag.fetchf.ManagerName_QA, @disabled = "disabled" })
+                                        </center>
+                                    </div>
+
+
+
+                                </div>
+
+
+                                <br />
+                                Date: @Html.TextBoxFor(f => f.DateAndTime_QA, (ViewBag.UserRole).Contains("QA") ? new { id = "dtesdd", @Value = @ViewBag.fetchf.DateAndTime_QA, type = "date" } : (object)new { id = "dtesdd", @Value = @ViewBag.fetchf.DateAndTime_QA, type = "date", @disabled = "disabled" })
+
+
+                                <br />
+
+                                @*@if((ViewBag.UserRole).Contains("QA"))*@
+
+                                <fieldset style="outline:double; padding:10px;margin:10px">
+                                    <legend>Configuration and Controlling Activities</legend>
+                                    @if (ViewBag.fetchf.C_CCA_ChecklistChecked_QA == true)
+                                    {
+                                        @*@Html.CheckBoxFor(f => f.C_CCA_ChecklistChecked_QA, new { @checked = "checked" })*@
+                                        @Html.CheckBoxFor(f => f.C_CCA_ChecklistChecked_QA, (ViewBag.UserRole).Contains("QA") ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+                                    }
+                                    else
+                                    {
+                                        @*@Html.CheckBoxFor(f => f.C_CCA_ChecklistChecked_QA)*@
+                                        @Html.CheckBoxFor(f => f.C_CCA_ChecklistChecked_QA, (ViewBag.UserRole).Contains("QA") ? new { } : (object)new { @disabled = "disabled" })
+                                    }
+                                    Part-II checklist checked and confirmed<br />
+
+                                    @if (ViewBag.fetchf.C_CCA_RelFilesMovedOrNot_QA == true)
+                                    {
+                                        @*@Html.CheckBoxFor(f => f.C_CCA_RelFilesMovedOrNot_QA, new { @checked = "checked" })*@
+                                        @Html.CheckBoxFor(f => f.C_CCA_RelFilesMovedOrNot_QA, (ViewBag.UserRole).Contains("QA") ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+
+                                    }
+                                    else
+                                    {
+                                        @*@Html.CheckBoxFor(f => f.C_CCA_RelFilesMovedOrNot_QA)*@
+                                        @Html.CheckBoxFor(f => f.C_CCA_RelFilesMovedOrNot_QA, (ViewBag.UserRole).Contains("QA") ? new { } : (object)new { @disabled = "disabled" })
+
+                                    }
+                                    Released Files moved to <u>\\CMS\Deployment-OPS\</u> @Html.TextBoxFor(f => f.C_CCA_RelFilesMovedToLoc_QA, (ViewBag.UserRole).Contains("QA") ? new { @Value = @ViewBag.fetchf.C_CCA_RelFilesMovedToLoc_QA } : (object)new { @Value = @ViewBag.fetchf.C_CCA_RelFilesMovedToLoc_QA, @disabled = "disabled" })<br />
+
+                                    Date: @Html.TextBoxFor(f => f.C_CCA_DateAndTime_QA, (ViewBag.UserRole).Contains("QA") ? new { @Value = @ViewBag.fetchf.C_CCA_DateAndTime_QA, type = "date" } : (object)new { @Value = @ViewBag.fetchf.C_CCA_DateAndTime_QA, type = "date", @disabled = "disabled" })
+
+                                </fieldset>
+
+                            </div>
+
+                            <!--  Check Application  -->
+
+                            <h3><u>Part 3: Deployment Activites</u></h3>
+                            <div class="form-group" style="padding:10px">
+
+                                @if (ViewBag.fetchf.FilesCopiedToDestination_Deployment == true)
+                                {
+                                    @*@Html.CheckBoxFor(f => f.FilesCopiedToDestination_Deployment, new { @checked = "checked", ViewBag.Readonly })*@
+                                    @Html.CheckBoxFor(f => f.FilesCopiedToDestination_Deployment, (ViewBag.UserRole).Contains("Operations") ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+
+                                }
+                                else
+                                {
+                                    @*@Html.CheckBoxFor(f => f.FilesCopiedToDestination_Deployment)*@
+                                    @Html.CheckBoxFor(f => f.FilesCopiedToDestination_Deployment, (ViewBag.UserRole).Contains("Operations") ? new { } : (object)new { @disabled = "disabled" })
+
+                                }
+                                All files mentioned in 'Released Files List' have been copied to the destination.<br />
+
+                                @if (ViewBag.fetchf.FilesExecuted_Deployment == true)
+                                {
+                                    @*@Html.CheckBoxFor(f => f.FilesExecuted_Deployment, new { @checked = "checked" })*@
+                                    @Html.CheckBoxFor(f => f.FilesExecuted_Deployment, (ViewBag.UserRole).Contains("Operations") ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+
+                                }
+                                else
+                                {
+                                    @*@Html.CheckBoxFor(f => f.FilesExecuted_Deployment)*@
+                                    @Html.CheckBoxFor(f => f.FilesExecuted_Deployment, (ViewBag.UserRole).Contains("Operations") ? new { } : (object)new { @disabled = "disabled" })
+
+                                }
+                                Files requiring execution as mentioned in the 'Release Files List' has been executed.<br />
+
+                                Deployed Succesfully: <br />
+                                <b>Production</b> @Html.RadioButtonFor(f => f.Production_Deployment, "Yes", ((ViewBag.UserRole).Contains("QA")) ? (@ViewBag.fetchf.Production_Deployment == "Yes" ? new { @checked = "checked" } : null) : (@ViewBag.fetchf.Production_Deployment == "Yes" ? new { @checked = "checked", @disabled = "disabled" } : (object)new { @disabled = "disabled" }))Yes @Html.RadioButtonFor(f => f.Production_Deployment, "No", ((ViewBag.UserRole).Contains("QA")) ? (@ViewBag.fetchf.Production_Deployment == "No" ? new { @checked = "checked" } : null) : (@ViewBag.fetchf.Production_Deployment == "No" ? new { @checked = "checked", @disabled = "disabled" } : (object)new { @disabled = "disabled" }))No
+                                <br />
+                                @*@Html.RadioButtonFor(f => f.Production_Deployment, "Yes", @ViewBag.fetchf.Production_Deployment == "Yes" ? new { @checked = "checked" } : (object)new { })  Yes  @Html.RadioButtonFor(f => f.Production_Deployment, "No", @ViewBag.fetchf.Production_Deployment == "No" ? new { @checked = "checked" } : (object)new { })  No<br />*@
+                                <b>Failover Site</b>@Html.RadioButtonFor(f => f.FailoverSite_Deployment, "Yes", ((ViewBag.UserRole).Contains("QA")) ? (@ViewBag.fetchf.FailoverSite_Deployment == "Yes" ? new { @checked = "checked" } : null) : (@ViewBag.fetchf.FailoverSite_Deployment == "Yes" ? new { @checked = "checked", @disabled = "disabled" } : (object)new { @disabled = "disabled" }))Yes @Html.RadioButtonFor(f => f.FailoverSite_Deployment, "No", ((ViewBag.UserRole).Contains("QA")) ? (@ViewBag.fetchf.FailoverSite_Deployment == "No" ? new { @checked = "checked" } : null) : (@ViewBag.fetchf.FailoverSite_Deployment == "No" ? new { @checked = "checked", @disabled = "disabled" } : (object)new { @disabled = "disabled" }))No
+                                @*@Html.RadioButtonFor(f => f.FailoverSite_Deployment, "Yes", (@ViewBag.UserRole).Contains("QA") ? (@ViewBag.fetchf.FailoverSite_Deployment == "Yes" ? new { @checked = "checked" } : (object)new { }) : @ViewBag.FailoverSite_Deployment == "Yes" ? new { @checked = "checked", @disabled = "disabled" } : (object)new { @disabled = "disabled" }) Yes @Html.RadioButtonFor(f => f.FailoverSite_Deployment, "No", (@ViewBag.UserRole).Contains("QA") ? (@ViewBag.fetchf.FailoverSite_Deployment == "No" ? new { @checked = "checked" } : (object)new { }) : @ViewBag.FailoverSite_Deployment == "No" ? new { @checked = "checked", @disabled = "disabled" } : (object)new { @disabled = "disabled" }) No*@
+
+                                @*<b>Failover Site</b>                   @Html.RadioButtonFor(f => f.FailoverSite_Deployment, "Yes", @ViewBag.fetchf.FailoverSite_Deployment=="Yes" ? new { @checked = "checked" } : (object)new { })  Yes @Html.RadioButtonFor(f => f.FailoverSite_Deployment, "No", @ViewBag.fetchf.FailoverSite_Deployment=="No" ? new { @checked = "checked" } : (object)new { })  No*@
+                                <br />
+
+                                <b>Comments:</b><br />
+
+
+                                <div style="width:100%;display:table">
+                                    <div style="display:table-cell">
+                                        <center><b><u>Deployed By</u></b></center>          <br />    <center>
+                                            @if (ViewBag.fetchf.DeployedBySign_Deployment == true)
+                                            {
+                                                @*@Html.CheckBoxFor(f => f.DeployedBySign_Deployment, new { @checked = "checked" })*@
+                                                @Html.CheckBoxFor(f => f.DeployedBySign_Deployment, (ViewBag.UserRole).Contains("Operations") ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+                                            }
+                                            else
+                                            {
+                                                @*@Html.CheckBoxFor(f => f.DeployedBySign_Deployment)*@
+                                                @Html.CheckBoxFor(f => f.DeployedBySign_Deployment, (ViewBag.UserRole).Contains("Operations") ? new { } : (object)new { @disabled = "disabled" })
+                                            }
+                                            Deployed by's Sign. <br />
+                                            @Html.TextBoxFor(f => f.DeployedByName_Deployment, (ViewBag.UserRole).Contains("Operations") ? new { placeholder = "Name (Deployed By)", @Value = @ViewBag.fetchf.DeployedByName_Deployment } : (object)new { placeholder = "Name (Deployed By)", @Value = @ViewBag.fetchf.DeployedByName_Deployment, @disabled = "disabled" })
+                                        </center>
+                                    </div>
+                                    <div style="display:table-cell">
+                                        <center><b><u>Unit In-charge</u></b></center>          <br />    <center>
+                                            @if (ViewBag.fetchf.UnitInchargeSign_Deployment == true)
+                                            {
+                                                @*@Html.CheckBoxFor(f => f.UnitInchargeSign_Deployment, new { @checked = "checked" })*@
+                                                @Html.CheckBoxFor(f => f.UnitInchargeSign_Deployment, ((ViewBag.UserRole).Contains("Operations") && ((ViewBag.UserRole).Contains("Team Lead"))) ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+
+                                            }
+                                            else
+                                            {
+                                                @*@Html.CheckBoxFor(f => f.UnitInchargeSign_Deployment)*@
+                                                @Html.CheckBoxFor(f => f.UnitInchargeSign_Deployment, ((ViewBag.UserRole).Contains("Operations") && ((ViewBag.UserRole).Contains("Team Lead"))) ? new { } : (object)new { @disabled = "disabled" })
+                                            }
+                                            Unit In-charge Sign. <br />
+                                            @Html.TextBoxFor(f => f.UnitInchargeName_Deployment, ((ViewBag.UserRole).Contains("Operations") && ((ViewBag.UserRole).Contains("Team Lead"))) ? new { id = "tlop", placeholder = "Name (Unit Incharge)", @Value = @ViewBag.fetchf.UnitInchargeName_Deployment } : (object)new { id = "tlop", placeholder = "Name (Unit Incharge)", @Value = @ViewBag.fetchf.UnitInchargeName_Deployment, @disabled = "disabled" })
+                                        </center>
+
+                                    </div>
+
+                                    <div style="display:table-cell">
+                                        <center><b><u>Department Head</u></b></center>          <br />    <center>
+                                            @if (ViewBag.fetchf.DepartmentHead_Deployment_Sign == true)
+                                            {
+                                                @*@Html.CheckBoxFor(f => f.DepartmentHead_Deployment_Sign, new { @checked = "checked" })*@
+                                                @Html.CheckBoxFor(f => f.DepartmentHead_Deployment_Sign, ((ViewBag.UserRole).Contains("Operations") && ((ViewBag.UserRole).Contains("Manager"))) ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+
+                                            }
+                                            else
+                                            {
+                                                @*@Html.CheckBoxFor(f => f.DepartmentHead_Deployment_Sign)*@
+                                                @Html.CheckBoxFor(f => f.DepartmentHead_Deployment_Sign, ((ViewBag.UserRole).Contains("Operations") && ((ViewBag.UserRole).Contains("Manager"))) ? new { } : (object)new { @disabled = "disabled" })
+                                            }
+                                            Department Head Sign. <br />
+                                            @Html.TextBoxFor(f => f.DepartmentHead_Deployment_Name, ((ViewBag.UserRole).Contains("Operations") && ((ViewBag.UserRole).Contains("Manager"))) ? new { id = "dhop", placeholder = "Name (Department Head)", @Value = @ViewBag.fetchf.DepartmentHead_Deployment_Name } : (object)new { placeholder = "Name (Department Head)", @Value = @ViewBag.fetchf.DepartmentHead_Deployment_Name, @disabled = "disabled" })
+                                        </center>
+                                    </div>
+
+                                </div>
+
+                                <br />
+
+                                Date: @Html.TextBoxFor(f => f.DateAndTime_Deployment, (ViewBag.UserRole).Contains("Operations") ? new { id = "dteop", @Value = @ViewBag.fetchf.DateAndTime_Deployment, type = "date" } : (object)new { id = "dteop", @Value = @ViewBag.fetchf.DateAndTime_Deployment, type = "date", @disabled = "disabled" })
+
+                                <br />
+                                @*@if((ViewBag.UserRole).Contains("QA"))*@
+
+                                <fieldset style="outline:double; padding:10px;margin:10px">
+                                    <legend>Configuration and Controlling Activities</legend>
+                                    @if (ViewBag.fetchf.C_CCA_ChecklistConfirmed_Deployment == true)
+                                    {
+                                        @*@Html.CheckBoxFor(f => f.C_CCA_ChecklistConfirmed_Deployment, new { @checked = "checked" })*@
+                                        @Html.CheckBoxFor(f => f.C_CCA_ChecklistConfirmed_Deployment, (ViewBag.UserRole).Contains("QA") ? new { @checked = "checked" } : (object)new { @disabled = "disabled", @checked = "checked" })
+                                    }
+                                    else
+                                    {
+                                        @*@Html.CheckBoxFor(f => f.C_CCA_ChecklistConfirmed_Deployment)*@
+                                        @Html.CheckBoxFor(f => f.C_CCA_ChecklistConfirmed_Deployment, (ViewBag.UserRole).Contains("QA") ? new { } : (object)new { @disabled = "disabled" })
+                                    }
+                                    Part-III checklist checked and confirmed<br />
+                                    Date: @Html.TextBoxFor(f => f.C_CCA_DateAndTime_Deployment, (ViewBag.UserRole).Contains("QA") ? new { @Value = @ViewBag.fetchf.C_CCA_DateAndTime_Deployment, type = "date" } : (object)new { @Value = @ViewBag.fetchf.C_CCA_DateAndTime_Deployment, type = "date", @disabled = "disabled" })
+
+                                    @*@Html.TextBoxFor(x => x.DateAndTime_Deployment, "{0:yyyy-MM-dd}", new { @type = "date", @Value = @ViewBag.fetchf.DateAndTime_Deployment })*@
+
+
+                                </fieldset>
+
+                                @*@Html.ActionLink("Features List","FeaturesListPage" )<br />
+                            @Html.ActionLink("Relesed Files","ReleasedFilesPage")*@
+                            </div>
+                            @if (ViewBag.isBugReport == "yes")
+                            {
+
+                            }
+                            else
+                            {
+                                <center><button type="button" id="savebutton" onclick="submitFormFunction()" class="btn btn-outline-success" style="width:120px">Save</button></center>
+                            }
+                    </fieldset>
+
+                }
+        </div>
+        <div>
+            <center><b><p style="color:maroon;font-size:25px"><u>Software Features List</u></p> </b></center>
+
+            @if (ViewBag.addAccess == "allowed")
+            {
+                 if (ViewBag.isBugReport == "yes")
+                 {
+                                     
+                 }
+                 else
+                 {
+                    <center><a class="btn btn-primary" id="addFeatures" href="@Url.Action("AddFeature","Home")" >Add new Feature</a></center>
+                 }
+            }
+            
+
+            <div style="display:none;" id="IFGenerated"> 
+                <div style="page-break-before: always">
+
+
+                    <div style="width:100%;border:solid;">
+                    <div style="display:table; width:100%;outline:solid;">
+                        <div style="display: table-cell; width: 20%; border: thick;"><img src="~/Content/logoztbl.jpg" width="50px" height="65px" /></div>
+                        <div style="display: table-cell; padding-left: 180px; padding: 7px; width: 80%; border: thick;"><b style="font-size:25px;margin-left:15%">Software Features List</b></div>
+                    </div>
+                     </div>
+                    <br /><br />
+                    <div style="display:table;width:100%;height:15px;">
+                        <div style="display:table-cell"><p style="text-align:left;font-size:22px"><b>Project Name: </b><u>@ViewBag.projectInfo.ProjectName</u></p></div>
+                        <div style="display:table-cell"><p style="text-align: right; font-size: 22px"><b>Version No: </b><u>@ViewBag.projectInfo.VersionNo</u></p></div>
+                    </div>
+                    <br /><br />
+                    @*<b style='font-size:25px'><center>Software Features List</center></b><br><br>*@
+                    <table style="width: 100%; outline: solid">
+                        <thead>
+                            <tr style="width:100%;text-align:left">
+                                <th style="width: 20%; border: 1px solid">S No.</th>
+                                <th style="width: 80%; border: 1px solid">Implemented Features</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int l = 0;
+                                foreach (var item in (IEnumerable<ZTBL_VersionReleaseFormAutomation.Models.SoftwareFeatureList>)ViewBag.FeaturesName)
+                                {
+                                    l = l + 1;
+                                    <tr style="width:100%;">
+                                        <td style="width:20%;border: 1px solid">@Html.DisplayName(l.ToString())</td>
+                                        <td style="width: 80%; border: 1px solid">@Html.DisplayFor(modelItem => item.ImplemetedFeatures)</td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div style="display:none" id="RFLGenerated">
+                <div style="page-break-before:always">
+                    @*<b style='font-size:25px'><center>Released Files List</center></b><br><br><br />*@
+
+                    <div style="width:100%;border:solid;">
+                    <div style="display:table; width:100%;outline:solid;">
+                        <div style="display: table-cell;  width: 20%; border: thick;"><img src="~/Content/logoztbl.jpg" width="50px" height="65px" /></div>
+                        <div style="display: table-cell; padding-left: 180px; padding: 7px; width: 80%; border: thick;"><b style="font-size:25px;margin-left:15%">Released Files List</b></div>
+                    </div>
+                </div>
+                    <br /><br />
+                    <div style="display:table;width:100%;height:15px;">
+                        <div style="display:table-cell"><p style="text-align:left;font-size:22px"><b>Project Name: </b><u>@ViewBag.projectInfo.ProjectName</u></p></div>
+                        <div style="display:table-cell"><p style="text-align:right;font-size:22px"><b>Version No: </b><u>@ViewBag.projectInfo.VersionNo</u></p></div>
+                    </div>
+                    <br /><br />
+                        <table style="width:100%;outline:solid;">
+                            <thead>
+                                <tr style="width:100%;text-align:left;outline:thin">
+                                    <th style="border:1px solid">
+                                        S No.
+                                    </th>
+                                    <th style="border:1px solid">
+                                        @Html.DisplayName("File name with path")
+                                    </th>
+                                    <th style="border:1px solid">
+                                        @Html.DisplayName("File type")
+                                    </th>
+                                    <th style="border:1px solid">
+                                        @Html.DisplayName("Date")
+                                    </th>
+                                    <th style="border:1px solid">
+                                        @Html.DisplayName("File size")
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int d = 0;
+                                    foreach (var item in (IEnumerable<ZTBL_VersionReleaseFormAutomation.Models.ReleasedFilesList>)ViewBag.ReleasedFilesName)
+                                    {
+                                        d = d + 1;
+                                        <tr>
+                                            <td style="border:1px solid">@Html.DisplayName(d.ToString())</td>
+                                            <td style="border:1px solid"> @Html.DisplayFor(modelItem => item.FilenameWithPath)</td>
+                                            <td style="border:1px solid"> @Html.DisplayFor(modelItem => item.FileType)</td>
+                                            <td style="border:1px solid"> @Html.DisplayFor(modelItem => item.DateTime)</td>
+                                            <td style="border:1px solid"> @Html.DisplayFor(modelItem => item.Size)</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+            </div>
+                <table style="background-color: #828282; color: #f9f9f9; font-family: 'Raleway', sans-serif; " class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead id="FLHeading">
+                        <tr>
+                            <th style="width:70px">
+                                S No.
+                            </th>
+                            <th>
+                                @Html.DisplayName("Implemented Feature(s)")
+                            </th>
+                            @if (ViewBag.addAccess == "allowed")
+                            {
+                                if (ViewBag.isBugReport == "yes")
+                                {
+
+                                }
+                                else
+                                {
+
+                                    <th style="width:100px">
+                                        Actions
+                                    </th>
+                                }
+                            }
+                        </tr>
+                    </thead>
+                    <tbody id="FLBody">
+                        @{int i = 0;
+
+                        foreach (var item in (IEnumerable<ZTBL_VersionReleaseFormAutomation.Models.SoftwareFeatureList>)ViewBag.FeaturesName)
+                        {
+                            i = i + 1;
+                            //onclick="@("window.location.href='" + @Url.Action("FormPage", "Home", new { fid = item.FormId }) + "'");"
+                            <tr class="unread">
+                                @*<td class="view-message  dont-show">@Html.DisplayFor(modelItem => item.S_No_)</td>*@
+                                <td class="view-message  dont-show">@Html.DisplayName(i.ToString())</td>
+                                <td class="view-message dont-show"> @Html.DisplayFor(modelItem => item.ImplemetedFeatures)</td>
+
+                                @if (ViewBag.addAccess == "allowed")
+                                {
+                                    if (ViewBag.isBugReport == "yes")
+                                    {
+
+                                    }
+                                    else
+                                    {
+                                        <td class="view-message  text-right">
+                                            <a class=" btn btn-danger" data-target="#exampleModal_@item.ID" style="cursor:hand" data-toggle="modal">Delete</a>
+                                        </td>
+                                    }
+                                }
+
+                                @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal4" data-whatever="@Url.Action("DeleteForm","Home")">Delete </button>*@
+
+                            </tr>
+
+                                    <!-- Delete Modal -->
+                            <div class="modal fade" id="exampleModal_@item.ID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-Content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel2">Are you sure?</h5>
+                                            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">×</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">Select "Delete" below if you are sure to delete this.</div>
+                                        <div class="modal-footer">
+                                            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                            <a class="btn btn-primary" href="@Url.Action("DeleteFeature", "Home", new { deleteId = item.ID})">Delete</a>
+                                            @*@Html.ActionLink("DeleteForm", "Home", new { id = item.FormId }, new { @class="btn btn-primary"})*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                   <!-- Delete Modal -->
+                        }}
+                    </tbody>
+                </table>
+            
+        </div>
+        <div>
+            <center><b><p style="color:maroon;font-size:25px" id="RFLHeading"><u>Released Files List</u></p> </b></center>            
+            @if (ViewBag.Access == "allowed")
+            {
+                if (ViewBag.isBugReport == "yes")
+                 {
+                 
+                 }
+                 else
+                 {
+                <center><a class="btn btn-primary" id="addReleased" href="@Url.Action("AddReleasedFiles","Home")" >Add Released File</a></center>
+                 }
+            }
+            <div class="card-body" id="releasedFiles">
+                <div class="table-responsive">
+@*                    <div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="dataTable_length"><label>Show <select name="dataTable_length" aria-controls="dataTable" class="form-control form-control-sm"><option value="10">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="dataTable_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable"></label></div></div></div>*@
+                    
+                        <table style="background-color: #828282; color: #f9f9f9; font-family: 'Raleway', sans-serif; " class="table table-bordered" id="dataTable2" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        S No.
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("File name with path")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("File type")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("Date")
+                                    </th>
+                                    <th>
+                                        @Html.DisplayName("File size")
+                                    </th>
+                                    @if (ViewBag.Access == "allowed")
+                                    {
+                                        if (ViewBag.isBugReport == "yes")
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            <th>
+                                                @Html.DisplayName("Actions")
+                                            </th>
+                                        }
+                                    }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{int k = 0;
+
+                                foreach (var item in (IEnumerable<ZTBL_VersionReleaseFormAutomation.Models.ReleasedFilesList>)ViewBag.ReleasedFilesName)
+                                {
+                                    k = k + 1;
+                                    //onclick="@("window.location.href='" + @Url.Action("FormPage", "Home", new { fid = item.FormId }) + "'");"
+                                    <tr class="unread">
+                                        @*<td class="view-message  dont-show">@Html.DisplayFor(modelItem => item.S_No_)</td>*@
+                                        @*<td class="view-message  dont-show">@Html.DisplayFor(modelItem => item.S_No_)</td>*@
+                                        <td class="view-message  dont-show">@Html.DisplayName(k.ToString())</td>
+                                        <td class="view-message dont-show"> @Html.DisplayFor(modelItem => item.FilenameWithPath)</td>
+                                        <td class="view-message dont-show"> @Html.DisplayFor(modelItem => item.FileType)</td>
+                                        <td class="view-message dont-show"> @Html.DisplayFor(modelItem => item.DateTime)</td>
+                                        <td class="view-message dont-show"> @Html.DisplayFor(modelItem => item.Size)</td>
+                                        @if (ViewBag.Access == "allowed")
+                                        {
+                                            if (ViewBag.isBugReport == "yes")
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                <td class="view-message dont-show"> <a class=" btn btn-danger" data-target="#exampleModal_@item.ID" style="cursor:hand" data-toggle="modal">Delete</a>           </td>
+                                            }
+                                        }
+                                    </tr>
+
+                                    @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal4" data-whatever="@Url.Action("DeleteForm","Home")">Delete </button>*@
+
+
+                                    <!-- Delete Modal -->
+                                    <div class="modal fade" id="exampleModal_@item.ID" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-Content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel2">Are you sure?</h5>
+                                                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">×</span>
+                                                    </button>
+                                                </div>
+                                                <div class="modal-body">Select "Delete" below if you are sure to delete this.</div>
+                                                <div class="modal-footer">
+                                                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                                    <a class="btn btn-primary" href="@Url.Action("DeleteReleasedFile", "Home", new { deleteId = item.ID})">Delete</a>
+                                                    @*@Html.ActionLink("DeleteForm", "Home", new { id = item.FormId }, new { @class="btn btn-primary"})*@
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                   <!-- Delete Modal -->
+                                }}
+                            </tbody>
+                        </table>
+                    
+                    @*<div class="row"><div class="col-sm-12 col-md-5"><div class="dataTables_info" id="dataTable_info" role="status" aria-live="polite">Showing 0 to 0 of 0 entries</div></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="dataTable_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="dataTable_previous"><a href="#" aria-controls="dataTable" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item next disabled" id="dataTable_next"><a href="#" aria-controls="dataTable" data-dt-idx="1" tabindex="0" class="page-link">Next</a></li></ul></div></div></div>*@
+                    </div>
+                </div>
+                </div>
+               
+                <footer class="sticky-footer">
+                    <div class="container">
+                        <div class="text-center">
+                            <small>Copyright © ZTBL 2017</small>
+                        </div>
+                    </div>
+                </footer>
+                <a class="scroll-to-top rounded" href="#page-top">
+                    <i class="fa fa-angle-up"></i>
+                </a>
+                <!-- Logout Modal-->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-Content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                                <a class="btn btn-primary" href="@Url.Action("Logout","Home")">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Bootstrap core JavaScript-->
+
+            </div>
+</body>
+
+</html>

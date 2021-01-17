@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DatabaseZTBLModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BugReport">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FormId" Type="Int32" />
+    <Property Name="Bug_Report_ID" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="BR_Holder" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="ProjectID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ProjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Version_Release" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TestingType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TesterName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TestingCycle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Reviewer" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Data_Severity" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Data_Priority" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Data_QAStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Data_DevelopmentStatus" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="BugReportTable">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Table_BugId" Type="Int32" Nullable="false" />
+    <Property Name="BugReportId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Table_BugTitle" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Table_BugDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Table_ReportingDate" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Table_Severirty" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Table_DevStatus" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Table_QAStatus" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="FormData">
+    <Key>
+      <PropertyRef Name="FormId" />
+    </Key>
+    <Property Name="FormId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SFLandRFLisAttached" Type="Boolean" Nullable="false" />
+    <Property Name="CpybaselineProvided" Type="Boolean" Nullable="false" />
+    <Property Name="VSSLabel" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RelFoldersLabeled" Type="Boolean" Nullable="false" />
+    <Property Name="RelFilesLocation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="RelFilesPlaced" Type="Boolean" Nullable="false" />
+    <Property Name="UnitTestingDone" Type="Boolean" Nullable="false" />
+    <Property Name="CodingStdFollowed" Type="Boolean" Nullable="false" />
+    <Property Name="PeerReview" Type="Boolean" Nullable="false" />
+    <Property Name="PeerReviewValues" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LeadDeveloperName_SDD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LeadDeveloperSign_SDD" Type="Boolean" Nullable="false" />
+    <Property Name="UnitInchargeName_SDD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UnitInchargeSign_SDD" Type="Boolean" Nullable="false" />
+    <Property Name="DepartmentHeadName_SDD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DepartmentHeadSign_SDD" Type="Boolean" Nullable="false" />
+    <Property Name="DateAndTime_SDD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="C_CCA_ChecklistChecked_SDD" Type="Boolean" Nullable="false" />
+    <Property Name="C_CCA_RelFilesMovedToLoc_SDD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="C_CCA_RelFilesMovedOrNot_SDD" Type="Boolean" Nullable="false" />
+    <Property Name="C_CCA_DateAndTime_SDD" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="C_CCA_Sign_SDD" Type="Boolean" Nullable="false" />
+    <Property Name="DiscoveredBugsReported" Type="Boolean" Nullable="false" />
+    <Property Name="DiscoveredBugsReportedRepNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="QATeamSatisfied" Type="Boolean" Nullable="false" />
+    <Property Name="SWStabilityComment_QA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LeadName_QA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LeadSign_QA" Type="Boolean" Nullable="false" />
+    <Property Name="ManagerName_QA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ManagerSign_QA" Type="Boolean" Nullable="false" />
+    <Property Name="DateAndTime_QA" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="C_CCA_ChecklistChecked_QA" Type="Boolean" Nullable="false" />
+    <Property Name="C_CCA_RelFilesMovedToLoc_QA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="C_CCA_RelFilesMovedOrNot_QA" Type="Boolean" Nullable="false" />
+    <Property Name="C_CCA_DateAndTime_QA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="C_CCA_Sign_QA" Type="Boolean" Nullable="false" />
+    <Property Name="FilesCopiedToDestination_Deployment" Type="Boolean" Nullable="false" />
+    <Property Name="FilesExecuted_Deployment" Type="Boolean" Nullable="false" />
+    <Property Name="Production_Deployment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="FailoverSite_Deployment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DeployedByName_Deployment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DeployedBySign_Deployment" Type="Boolean" Nullable="false" />
+    <Property Name="UnitInchargeName_Deployment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UnitInchargeSign_Deployment" Type="Boolean" Nullable="false" />
+    <Property Name="DepartmentHead_Deployment_Sign" Type="Boolean" Nullable="false" />
+    <Property Name="DepartmentHead_Deployment_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DateAndTime_Deployment" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="C_CCA_ChecklistConfirmed_Deployment" Type="Boolean" Nullable="false" />
+    <Property Name="C_CCA_DateAndTime_Deployment" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="C_CCA_Sign_Deployment" Type="Boolean" Nullable="false" />
+    <Property Name="FormHolder" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ProjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VersionNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VersionDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VersionDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ProjectId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Version" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="ProjectDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Manager_SDD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UnitIncharge_SDD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LeadDeveloper_SDD" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Manager_QA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UnitIncharge_QA" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Manager_Operations" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UnitIncharge_Operations_" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ReleasedFilesList">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FormId" Type="Int32" Nullable="false" />
+    <Property Name="S_No_" Type="Int32" Nullable="false" />
+    <Property Name="FilenameWithPath" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="FileType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="DateTime" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="Size" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="TotalFilesAttached" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="LeadDeveloperSign" Type="Binary" MaxLength="50" FixedLength="true" />
+    <Property Name="UnitInchargeSign" Type="Binary" MaxLength="50" FixedLength="true" />
+    <Property Name="DepartmentHeadSign" Type="Binary" MaxLength="50" FixedLength="true" />
+  </EntityType>
+  <EntityType Name="SoftwareFeatureList">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FormId" Type="Int32" Nullable="false" />
+    <Property Name="S_No_" Type="Int32" Nullable="false" />
+    <Property Name="ImplemetedFeatures" Type="String" MaxLength="350" FixedLength="false" Unicode="false" />
+    <Property Name="LeadDeveloperSign" Type="Binary" MaxLength="50" FixedLength="false" />
+    <Property Name="UnitInchargeSign" Type="Binary" MaxLength="350" FixedLength="false" />
+    <Property Name="DepartmentHeadSign" Type="Binary" MaxLength="50" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="UAT_Team">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="UATFormId" Type="Int32" Nullable="false" />
+    <Property Name="PPNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UAT_Team1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="UATFormId" Type="Int32" Nullable="false" />
+    <Property Name="PPNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="UATForm">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectId" Type="Int32" />
+    <Property Name="ProjectName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Functionalities" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Version" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Date" Type="DateTime" Precision="0" />
+    <Property Name="Department" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="SVP_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="SVP_PPNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="SVP_Designation" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Holder_PPNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="PPNumber" />
+    </Key>
+    <Property Name="PPNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Designation" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="UserType" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="PasswordSalt" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="LastLogin" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="UserRole" Type="String" MaxLength="35" FixedLength="false" Unicode="false" />
+    <Property Name="Boss" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Form">
+    <Key>
+      <PropertyRef Name="FormIdd" />
+    </Key>
+    <Property Name="FormIdd" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FormHolder" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ProjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VersionNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VersionDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="VersionDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="DatabaseZTBLEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BugReports" EntityType="Self.BugReport" />
+    <EntitySet Name="BugReportTables" EntityType="Self.BugReportTable" />
+    <EntitySet Name="FormDatas" EntityType="Self.FormData" />
+    <EntitySet Name="Projects" EntityType="Self.Project" />
+    <EntitySet Name="ReleasedFilesLists" EntityType="Self.ReleasedFilesList" />
+    <EntitySet Name="SoftwareFeatureLists" EntityType="Self.SoftwareFeatureList" />
+    <EntitySet Name="UAT_Teams" EntityType="Self.UAT_Team" />
+    <EntitySet Name="UAT_Teams1" EntityType="Self.UAT_Team1" />
+    <EntitySet Name="UATForms" EntityType="Self.UATForm" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="Forms" EntityType="Self.Form" />
+  </EntityContainer>
+</Schema>

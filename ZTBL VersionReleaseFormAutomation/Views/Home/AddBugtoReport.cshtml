@@ -1,0 +1,309 @@
+﻿@model ZTBL_VersionReleaseFormAutomation.Models.BugReportTable
+@using System.Collections.Generic;
+@using System.Web.Optimization;
+@{
+    Layout = null;
+}
+
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SB Admin - Start Bootstrap Template</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah|Poiret+One" rel="stylesheet">
+    <link href="~/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    @Styles.Render("~/Content/vendor/bootstrap/css/bootstrap.min.css")
+    <!-- Custom fonts for this template-->
+    <link href="~/Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">*
+    @Styles.Render("~/Content/vendor/font-awesome/css/font-awesome.min.css")
+    <!-- Page level plugin CSS-->
+    <link href="~/Content/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    @Styles.Render("~/Content/vendor/datatables/dataTables.bootstrap4.css")
+    <!-- Custom styles for this template-->
+    <link href="~/Content/css/sb-admin.css" rel="stylesheet">
+    @Styles.Render("~/Content/css/sb-admin.css")
+    @Styles.Render("~/Content/wid.css")
+    @Scripts.Render("~/Content/wid.js")
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" />
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/popper/popper.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="~/Content/vendor/chart.js/Chart.min.js"></script>
+    <script src="~/Content/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="~/Content/js/sb-admin.min.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="~/Content/js/sb-admin-datatables.min.js"></script>
+    <script src="~/Content/js/sb-admin-charts.min.js"></script>
+
+    
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $('input[type=text]').attr('maxlength', '50');
+                $('input[type=number]').attr('maxlength', '20');
+
+                check();
+                //if ($("nameTag").html.toString().indexOf("(QA)")) {
+                //}
+                //else {
+
+                //}
+                //$("devStatus").attr("disabled",true);
+
+            })
+
+        </script>
+        <script type="text/javascript">
+           
+            function check() {
+                if (document.getElementById("nameTag").innerHTML.indexOf("(QA")) {
+                    document.getElementById("devStatus").disabled = true;
+
+                }
+            }
+
+        </script>
+
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <img src="~/Content/logoztbl.jpg" height="50px" width="28px" style="border-radius:3px" />&nbsp;&nbsp;&nbsp;<a class="navbar-brand" href="@Url.Action("Dashboard","Home")">Version Release</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="@Url.Action("Dashboard","Home")">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Dashboard</span>
+                    </a>
+                </li>
+                @if ((ViewBag.UserRole).Contains("SDD") == true)
+{
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="CreateNewForm">
+        <a class="nav-link" href="@Url.Action("CreateNewVersionRelease","Home")">
+            <i class="fa fa-fw fa-book"></i>
+            <span class="nav-link-text">Create New Form</span>
+        </a>
+    </li>
+}
+@if ((ViewBag.UserRole).Contains("QA") == true)
+{
+    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="CreateNewForm">
+        <a class="nav-link" href="@Url.Action("CreateBugReport","Home")">
+            <i class="fa fa-fw fa-book"></i>
+            <span class="nav-link-text">Create Bug Report</span>
+        </a>
+    </li>
+}
+                
+
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="BugReports">
+                    <a class="nav-link" href="@Url.Action("BugReport","Home")">
+                        <i class="fa fa-fw fa-chain-broken"></i>
+                        <span class="nav-link-text">Bug Reports</span>
+                    </a>
+                </li>
+
+                @*<li class="nav-item" data-toggle="tooltip" data-placement="right" title="Tables">
+                        <a class="nav-link" href="@Url.Action("AdminPanel","Home")">
+                            <i class="fa fa-fw fa-table"></i>
+                            <span class="nav-link-text">Admin Panel</span>
+                        </a>
+                    </li>*@
+                @if (ViewBag.UserType == "Admin")
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+                            <i class="fa fa-fw fa-table"></i>
+                            <span class="nav-link-text">Admin Panel</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="collapseComponents">
+                            <li>
+                                <a href="@Url.Action("AdminPanel","Home")">See Users</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Register","Home")">Add New Users</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ManageProject","Home")">Manage Projects</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+
+
+                
+            </ul>
+            <ul class="navbar-nav sidenav-toggler">
+                
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0 mr-lg-2">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </li>
+                <li>
+
+                    <p style="color:white;padding-top:7px" id="nameTag">@ViewBag.Username, @ViewBag.UserRole </p>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-fw fa-sign-out"></i>Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="Content-wrapper">
+        <div class="container-fluid">
+            
+          
+            <!-- Example DataTables Card-->
+
+        </div>
+        <!-- /.container-fluid-->
+        <!-- /.~/Content-wrapper-->
+
+        <p style="font-size:35px;color:maroon;padding-left:30px"><b>    Add Bug to Report</b></p>
+        <div class="row">
+            <div class="col-lg-8">
+
+                <hr class="mt-2">
+
+            </div>
+            <div class="col-lg-4">
+
+            </div>
+        </div>
+        <form method="post" style="padding:30px">
+            @* <b>@Html.Label("S.No.") </b> @Html.TextBoxFor(model => model.S_No_, new { @class = "form-control", type = "number", size="5" })<br />*@
+            <b> @Html.Label("Bug Title")</b> @Html.TextBoxFor(model => model.Table_BugTitle, new { @required="required",@class = "form-control", style="width:300px" })<br />
+            <b> @Html.Label("Bug Description")</b> @Html.TextAreaFor(model => model.Table_BugDescription, new { @class = "form-control",@required="required", style = "width:300px" })<br />
+            <b> @Html.Label("Reporting Date")</b> @Html.TextBoxFor(model => model.Table_ReportingDate, new {@type ="date", @required="required", @class = "form-control", style="width:175px" })<br />
+            <b> @Html.Label("Severity")</b> <br />
+            @*@Html.TextBoxFor(model => model.Table_Severirty, new { @class = "form-control" })<br />*@
+            @Html.DropDownListFor(model => model.Table_Severirty, new List<SelectListItem> {
+                       new SelectListItem { Value = "L0: I - Immediate" , Text = "L0: I - Immediate" },
+                       new SelectListItem { Value = "L1: U - Urgent" , Text = "L1: U - Urgent" },
+                       new SelectListItem { Value = "L2: Imp - Important" , Text = "L2: Imp - Important"},
+                       new SelectListItem { Value = "L3: M - Minor" , Text = "L3: M - Minor" },
+                       new SelectListItem { Value = "L4: C - Cosmetic" , Text = "L4: C - Cosmetic" }
+                    }, "Select", new { @class = "form-control", @required = "required", style="width:235px" })
+
+            <b> @Html.Label("Development Status")</b><br />
+            @* @Html.TextBoxFor(model => model.Table_DevStatus, new { @class = "form-control" })<br />*@
+            @Html.DropDownListFor(model => model.Table_DevStatus, new List<SelectListItem> {
+                       new SelectListItem { Value = "1-Fixed" , Text = "1-Fixed" },
+                       new SelectListItem { Value = "2-Not a bug" , Text = "2-Not a bug" },
+                       new SelectListItem { Value = "3-Pending" , Text = "3-Pending"},
+                       new SelectListItem { Value = "4-Deffered" , Text = "4-Deffered" },
+                       new SelectListItem { Value = "5-Tool Limitations" , Text = "5-Tool Limitations" },
+                       new SelectListItem { Value = "6-Not to be fixed" , Text = "6-Not to be fixed" },
+                       new SelectListItem { Value = "7-Not Reproducible" , Text = "7-Not Reproducible" },
+                       new SelectListItem { Value = "8-Document Updated" , Text = "8-Document Updated" }
+                    }, "Select", new { @class = "form-control", id="devStatus", style = "width:235px" })
+            <b> @Html.Label("QA Status")</b> <br />
+            @*@Html.TextBoxFor(model => model.Table_QAStatus, new { @class = "form-control" })<br />*@
+            @Html.DropDownListFor(model => model.Table_QAStatus, new List<SelectListItem> {
+                       new SelectListItem { Value = "L0: I - Immediate" , Text = "L0: I - Immediate" },
+                       new SelectListItem { Value = "L1: U - Urgent" , Text = "L1: U - Urgent" },
+                       new SelectListItem { Value = "L2: Imp - Important" , Text = "L2: Imp - Important"},
+                       new SelectListItem { Value = "L3: M - Minor" , Text = "L3: M - Minor" },
+                       new SelectListItem { Value = "L4: C - Cosmetic" , Text = "L4: C - Cosmetic" }
+                    }, "Select", new { @class = "form-control", style = "width:235px" })
+
+
+
+
+
+            <br />
+            @*@Html.DropDownListFor(model => model.Table_QAStatus, new List<SelectListItem> {
+                       new SelectListItem { Value = "1-Open" , Text = "1-Open" },
+                       new SelectListItem { Value = "2-Closed" , Text = "2-Closed" },
+                       new SelectListItem { Value = "3-Not Fixed" , Text = "3-Not Fixed"},
+                       new SelectListItem { Value = "4-Re Open" , Text = "4-Re Open" }
+                    }, "Select", new { @class = "form-control", @required="required" })*@
+
+
+            <input type="submit" value="Add to list" class="btn-success" />
+
+        </form>
+
+        <footer class="sticky-footer">
+            <div class="container">
+                <div class="text-center">
+                    <small>Copyright © Your Website 2017</small>
+                </div>
+            </div>
+        </footer>
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-Content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="@Url.Action("Logout","Home")">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Bootstrap core JavaScript-->
+
+    </div>
+
+    <!-- Modal-->
+    @*<div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Delete the form</h4>
+                    </div>
+                    <div class="modal-body">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button"  class="btn btn-primary">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+</body>
+
+</html>

@@ -1,0 +1,594 @@
+﻿@model ZTBL_VersionReleaseFormAutomation.Models.FormData
+@using System.Web.Optimization;
+@using System.Collections.Generic;
+
+@{
+    Layout = null;
+}
+
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SB Admin - Start Bootstrap Template</title>
+    <!-- Bootstrap core CSS-->
+    <link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Old+Standard+TT" rel="stylesheet">
+    <link href="~/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    @Styles.Render("~/Content/vendor/bootstrap/css/bootstrap.min.css")
+    <!-- Custom fonts for this template-->
+    <link href="~/Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">*
+    @Styles.Render("~/Content/vendor/font-awesome/css/font-awesome.min.css")
+    <!-- Page level plugin CSS-->
+    <link href="~/Content/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    @Styles.Render("~/Content/vendor/datatables/dataTables.bootstrap4.css")
+    <!-- Custom styles for this template-->
+    <link href="~/Content/css/sb-admin.css" rel="stylesheet">
+    @Styles.Render("~/Content/css/sb-admin.css")
+
+
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/popper/popper.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="~/Content/vendor/chart.js/Chart.min.js"></script>
+    <script src="~/Content/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="~/Content/js/sb-admin.min.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="~/Content/js/sb-admin-datatables.min.js"></script>
+    <script src="~/Content/js/sb-admin-charts.min.js"></script>
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <img src="~/Content/logoztbl.jpg" height="50px" width="28px" style="border-radius:3px" />&nbsp;&nbsp;&nbsp;<a class="navbar-brand" href="@Url.Action("Dashboard","Home")">Version Release</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="CreateNewForm">
+                    <a class="nav-link" href="@Url.Action("CreateNewVersionRelease","Home")">
+                        <i class="fa fa-fw fa-book"></i>
+                        <span class="nav-link-text">Create New Form</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="CreateNewForm">
+                    <a class="nav-link" href="@Url.Action("CreateBugReport","Home")">
+                        <i class="fa fa-fw fa-book"></i>
+                        <span class="nav-link-text">Create Bug Report</span>
+                    </a>
+                </li>
+                
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="BugReports">
+                    <a class="nav-link" href="@Url.Action("BugReport","Home")">
+                        <i class="fa fa-fw fa-chain-broken"></i>
+                        <span class="nav-link-text">Bug Reports</span>
+                    </a>
+                </li>
+
+
+                @if (ViewBag.UserType == "Admin")
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+                            <i class="fa fa-fw fa-table"></i>
+                            <span class="nav-link-text">Admin Panel</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="collapseComponents">
+                            <li>
+                                <a href="@Url.Action("AdminPanel","Home")">See Users</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Register","Home")">Add New Users</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Settings">
+                    <a class="nav-link" href="#">
+                        <i class="fa fa-fw fa-gear"></i>
+                        <span class="nav-link-text">Settings</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav sidenav-toggler">
+                <li class="nav-item">
+                    <a class="nav-link text-center" id="sidenavToggler">
+                        <i class="fa fa-fw fa-angle-left"></i>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle mr-lg-2" id="messagesDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-fw fa-envelope"></i>
+                        <span class="d-lg-none">
+                            Messages
+                            <span class="badge badge-pill badge-primary">12 New</span>
+                        </span>
+                        <span class="indicator text-primary d-none d-lg-block">
+                            <i class="fa fa-fw fa-circle"></i>
+                        </span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="messagesDropdown">
+                        <h6 class="dropdown-header">New Messages:</h6>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">
+                            <strong>David Miller</strong>
+                            <span class="small float-right text-muted">11:21 AM</span>
+                            <div class="dropdown-message small">Hey there! This new version of SB Admin is pretty awesome! These messages clip off when they reach the end of the box so they don't overflow over to the sides!</div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">
+                            <strong>Jane Smith</strong>
+                            <span class="small float-right text-muted">11:21 AM</span>
+                            <div class="dropdown-message small">I was wondering if you could meet for an appointment at 3:00 instead of 4:00. Thanks!</div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">
+                            <strong>John Doe</strong>
+                            <span class="small float-right text-muted">11:21 AM</span>
+                            <div class="dropdown-message small">I've sent the final files over to you for review. When you're able to sign off of them let me know and we can discuss distribution.</div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item small" href="#">View all messages</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle mr-lg-2" id="alertsDropdown" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-fw fa-bell"></i>
+                        <span class="d-lg-none">
+                            Alerts
+                            <span class="badge badge-pill badge-warning">6 New</span>
+                        </span>
+                        <span class="indicator text-warning d-none d-lg-block">
+                            <i class="fa fa-fw fa-circle"></i>
+                        </span>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="alertsDropdown">
+                        <h6 class="dropdown-header">New Alerts:</h6>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">
+                            <span class="text-success">
+                                <strong>
+                                    <i class="fa fa-long-arrow-up fa-fw"></i>Status Update
+                                </strong>
+                            </span>
+                            <span class="small float-right text-muted">11:21 AM</span>
+                            <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">
+                            <span class="text-danger">
+                                <strong>
+                                    <i class="fa fa-long-arrow-down fa-fw"></i>Status Update
+                                </strong>
+                            </span>
+                            <span class="small float-right text-muted">11:21 AM</span>
+                            <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="#">
+                            <span class="text-success">
+                                <strong>
+                                    <i class="fa fa-long-arrow-up fa-fw"></i>Status Update
+                                </strong>
+                            </span>
+                            <span class="small float-right text-muted">11:21 AM</span>
+                            <div class="dropdown-message small">This is an automated server response message. All systems are online.</div>
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item small" href="#">View all alerts</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0 mr-lg-2">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </li>
+                <li>
+
+                    <p style="color:white;padding-top:7px">@ViewBag.Username, @ViewBag.UserRole </p>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-fw fa-sign-out"></i>Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="Content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+
+            <div style="display:table;width:100%;border:solid;padding-left:10px">
+                <div style="display: table-cell; width: 20%; border:thick;"><img src="~/Content/logoztbl.jpg" width="60px" height="80px" /></div>
+                <div style="display: table-cell; padding-left: 130px; width: 80%;border:thick;"><legend><b style="color:maroon;">Version Release Form</b></legend></div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <hr class="mt-2">
+                </div>
+                <div class="col-lg-4">
+                </div>
+            </div>
+            <!-- Example DataTables Card-->
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+
+                <fieldset style="outline: solid; font-family: 'Didact Gothic', sans-serif; padding: 10px; margin: 0px; ">
+
+                    <div style="display:table;width:100%;height:15px;">
+                        <div style="display:table-cell;width:50%"><p style="text-align:left"><b>Project Name: @Html.TextBoxFor(u => u.ProjectName, new { @required="required"})</p></div>
+                        <div style="display:table-cell;width:50%"><p style="text-align:right"><b>Version No: </b>@Html.TextBoxFor(u => u.VersionNo, new { @required = "required" })</p></div>
+                    </div>
+
+                    <div style="display: table; width: 100%; height: 15px;">
+                        <div style="display:table-cell"><p style="text-align:center"> <p style="text-align:left"><b>Version Description: </b>@Html.TextBoxFor(u => u.VersionDescription, new { @required = "required" })</p></div>
+                        <div style="display:table-cell"><p style="text-align:center"><p style="text-align:right"><b>Version Date: </b>@Html.TextBoxFor(u => u.VersionDate, new { type="date", @required="required"})</p></div>
+                    </div>
+
+                    <div style="display:table;width:100%;height:10px;text-align:center">
+                        <div style="display:table-cell"><b>@Html.RadioButtonFor(f=>f.Type,"NewProduct") New Product</b></div>
+                        <div style="display:table-cell"><b>@Html.RadioButtonFor(f=>f.Type,"BugFix") Bug Fix</b></div>
+                        <div style="display:table-cell"><b>@Html.RadioButtonFor(f=>f.Type,"Enhancement")Enhancement</b></div>
+                        @Html.ValidationMessageFor(f => f.Type, null, new { @class="text-danger"})
+                    </div>
+                    <p style="text-align:center">
+
+
+                    </p>
+                    <!--   Check Application -->
+                    <h3><u>Part 1: Development Activities</u></h3>
+                    <div class="form-group" style="padding:10px">
+
+                       
+                            @*@Html.CheckBoxFor(f => f.SFLandRFLisAttached, new {   })*@
+                            @Html.CheckBoxFor(f => f.SFLandRFLisAttached, (ViewBag.UserRole).Contains("SDD") ? new {   } : (object)new { @disabled = "disabled",   })
+                        
+                        "Software Feature List" and "Released Files List" is attached.<br />
+
+                        
+                            @*@Html.CheckBoxFor(f => f.CpybaselineProvided, new {   })*@
+                            @Html.CheckBoxFor(f => f.CpybaselineProvided, (ViewBag.UserRole).Contains("SDD") ? new {   } : (object)new { @disabled = "disabled",   })
+                        
+                        Copy of baseline document (i.e. RSD, User Request etc) is provided.<br />
+
+                        
+                            @*@Html.CheckBoxFor(f => f.RelFoldersLabeled, new {   })*@
+                            @Html.CheckBoxFor(f => f.RelFoldersLabeled, (ViewBag.UserRole).Contains("SDD") ? new {   } : (object)new { @disabled = "disabled",   })
+                        
+                        Released related folders/files have been labeled in VSS. ( VSS Label):
+                        @Html.TextBoxFor(f => f.VSSLabel, new { style = "height:19px" })<br />
+
+
+                        
+                            @*@Html.CheckBoxFor(f => f.RelFilesPlaced, new {   })*@
+                            @Html.CheckBoxFor(f => f.RelFilesPlaced, (ViewBag.UserRole).Contains("SDD") ? new {   } : (object)new { @disabled = "disabled",   })
+                       
+                        The Released Files are placed at location <u>\\CMS\Deployment-SDD\</u>
+                        @Html.TextBoxFor(f => f.RelFilesLocation, new { style = "height:19px" }) <br />
+
+                        
+                            @*@Html.CheckBoxFor(f => f.UnitTestingDone, new {   })*@
+                            @Html.CheckBoxFor(f => f.UnitTestingDone, (ViewBag.UserRole).Contains("SDD") ? new {   } : (object)new { @disabled = "disabled",   })
+                        
+                        Unit Testing Done. <br />
+
+                       
+                            @*@Html.CheckBoxFor(f => f.CodingStdFollowed, new {   })*@
+                            @Html.CheckBoxFor(f => f.CodingStdFollowed, (ViewBag.UserRole).Contains("SDD") ? new {   } : (object)new { @disabled = "disabled",   })
+                       
+                        Coding Guidelines/standards followed.<br />
+
+                        
+                            @*@Html.CheckBoxFor(f => f.PeerReview, new {   })*@
+                            @Html.CheckBoxFor(f => f.PeerReview, (ViewBag.UserRole).Contains("SDD") ? new {   } : (object)new { @disabled = "disabled",   })
+                        
+                        Peer Review(s) [ @Html.RadioButtonFor(f => f.PeerReviewValues, "Conducted")Conducted        @Html.RadioButtonFor(f => f.PeerReviewValues, "Not Required") Not Required  ]
+                        <br /><br /><br />
+
+
+
+                        <b>Comments:</b><br />
+                        <div style="width:100%;display:table">
+                            <div style="display:table-cell">
+                                <center><b><u>Lead Developer</u></b> </center>         <br />
+                                <center>
+                                   
+                                        @*@Html.CheckBoxFor(f => f.LeadDeveloperSign_SDD, new {   })*@
+                                        @Html.CheckBoxFor(f => f.LeadDeveloperSign_SDD, ((ViewBag.UserRole).Contains("SDD") && ((ViewBag.UserRole).Contains("Lead Developer"))) ? new {   } : (object)new { @disabled = "disabled",   })
+                                  
+                                    Lead Developer Sign. <br />
+                                    @Html.TextBoxFor(f => f.LeadDeveloperName_SDD, new { placeholder = "Name (Lead Developer)"})
+                                </center>
+                            </div>
+                            <div style="display:table-cell">
+                                <center><b><u>Unit Incharge</u></b>  </center>        <br />
+                                <center>
+                                   
+                                        @*@Html.CheckBoxFor(f => f.UnitInchargeSign_SDD, new {  , @disabled = "disabled" })*@
+                                        @Html.CheckBoxFor(f => f.UnitInchargeSign_SDD, ((ViewBag.UserRole).Contains("SDD") && ((ViewBag.UserRole).Contains("Team Lead"))) ? new {   } : (object)new { @disabled = "disabled",   })
+
+                                    Unit Incharge Sign. <br />
+
+                                    @Html.TextBoxFor(f => f.UnitInchargeName_SDD, new { placeholder = "Name (Unit Incharge)"})
+                                </center>
+
+                            </div>
+
+                            <div style="display:table-cell">
+                                <center><b><u>Department Head</u></b></center>          <br />
+                                <center>
+                                    
+                                        @*@Html.CheckBoxFor(f => f.DepartmentHeadSign_SDD, new {   })*@
+                                        @Html.CheckBoxFor(f => f.DepartmentHeadSign_SDD, ((ViewBag.UserRole).Contains("SDD") && ((ViewBag.UserRole).Contains("Manager"))) ? new {   } : (object)new { @disabled = "disabled",   })
+
+                                    Department Head Sign. <br />
+
+                                    @Html.TextBoxFor(f => f.DepartmentHeadName_SDD, new { placeholder = "Name (Department Head)"})
+                                </center>
+                            </div>
+
+                        </div>
+                        <br />
+
+                        <b>Date:</b>  @Html.TextBoxFor(f => f.DateAndTime_SDD, new { type = "date"})
+                        @*<input type="date" placeholder="@DateTime.Now.ToString("yyyy-mm-dd")" /><br />*@
+                        <fieldset style="outline:double; padding:10px;margin:10px">
+
+                            <legend>Configuration and Controlling Activities</legend>
+
+                            
+                                @*@Html.CheckBoxFor(f => f.C_CCA_ChecklistChecked_SDD, new {   })*@
+                                @Html.CheckBoxFor(f => f.C_CCA_ChecklistChecked_SDD, (ViewBag.UserRole).Contains("QA") ? new {   } : (object)new { @disabled = "disabled",   })
+
+                            Part-I checklist checked and confirmed<br />
+
+                           
+                                @*@Html.CheckBoxFor(f => f.C_CCA_RelFilesMovedOrNot_SDD, new {   })*@
+                                @Html.CheckBoxFor(f => f.C_CCA_RelFilesMovedOrNot_SDD, (ViewBag.UserRole).Contains("QA") ? new {   } : (object)new { @disabled = "disabled",   })
+
+                            
+                            Released Files moved to <u>\\CMS\Deployment-QAD\</u>
+                            @Html.TextBoxFor(f => f.C_CCA_RelFilesMovedToLoc_SDD, new { })<br />
+
+                            Date: @*<input type="date" placeholder="@DateTime.Now.ToString("yyyy-mm-dd") " />*@
+                            @Html.TextBoxFor(f => f.C_CCA_DateAndTime_SDD, new { type = "date" })
+
+                        </fieldset>
+                    </div>
+                    <br /><br />
+                    <!--   Check appliation-->
+                    <h3><u>Part 2: QA Activities</u></h3>
+                    <div class="form-group" style="padding:10px">
+
+                        @*@Html.ActionLink("Create Bug Report", "CreateBugReport", new { formIdBugReport = ViewBag.formId})*@
+                        <br />
+
+                       
+                            @*@Html.CheckBoxFor(f => f.DiscoveredBugsReported, new {   })*@
+                            @Html.CheckBoxFor(f => f.DiscoveredBugsReported, (ViewBag.UserRole).Contains("QA") ? new {   } : (object)new { @disabled = "disabled",   })
+                       
+                        Discovered bugs have been reported vide bug Report No. @Html.TextBoxFor(f => f.DiscoveredBugsReportedRepNo, new { style = "height:19px" })<br />
+                       
+                            @*@Html.CheckBoxFor(f => f.QATeamSatisfied, new {   })*@
+                            @Html.CheckBoxFor(f => f.QATeamSatisfied, (ViewBag.UserRole).Contains("QA") ? new {   } : (object)new { @disabled = "disabled",   })
+                        
+                        QA team satisfied with this release.<br />
+
+
+                        Software Stability: [        @Html.RadioButtonFor(f => f.SWStabilityComment_QA, "RequiresAnotherCycle") Requires Another QA Cycle  @Html.RadioButtonFor(f => f.SWStabilityComment_QA, "Deployable")  Deployable ]
+                        <br /><br /><br />
+
+
+                        <b>Comments:</b><br />
+
+                        <div style="width:100%;display:table">
+                            <div style="display:table-cell">
+                                <center><b><u>QA Lead</u></b></center>          <br />    <center>
+                                   
+                                        @*@Html.CheckBoxFor(f => f.LeadSign_QA, new {   })*@
+                                        @Html.CheckBoxFor(f => f.LeadSign_QA, ((ViewBag.UserRole).Contains("QA") && ((ViewBag.UserRole).Contains("Team Lead"))) ? new {   } : (object)new { @disabled = "disabled",   })
+
+                                   
+                                    QA Lead Sign. <br />
+                                    @Html.TextBoxFor(f => f.LeadName_QA, new { placeholder = "Name (QA Lead)"})
+                                </center>
+                            </div>
+                            <div style="display:table-cell">
+                                <center><b><u>QA Manager</u></b></center>          <br />    <center>
+
+                                   
+                                        @*@Html.CheckBoxFor(f => f.ManagerSign_QA, new {   })*@
+                                        @Html.CheckBoxFor(f => f.ManagerSign_QA, ((ViewBag.UserRole).Contains("QA") && ((ViewBag.UserRole).Contains("Manager"))) ? new {   } : (object)new { @disabled = "disabled",   })
+
+                                    QA Manager Sign. <br />
+                                    @Html.TextBoxFor(f => f.ManagerName_QA, new { placeholder = "Name (QA Manager)"})
+                                </center>
+                            </div>
+
+
+
+                        </div>
+
+
+                        <br />
+                        Date: @Html.TextBoxFor(f => f.DateAndTime_QA, new {type = "date" })
+
+
+                        <br />
+
+                        <fieldset style="outline:double; padding:10px;margin:10px">
+                            <legend>Configuration and Controlling Activities</legend>
+
+                                @*@Html.CheckBoxFor(f => f.C_CCA_ChecklistChecked_QA, new {   })*@
+                                @Html.CheckBoxFor(f => f.C_CCA_ChecklistChecked_QA, (ViewBag.UserRole).Contains("QA") ? new {   } : (object)new { @disabled = "disabled",   })
+
+                            Part-II checklist checked and confirmed<br />
+
+                           
+                                @*@Html.CheckBoxFor(f => f.C_CCA_RelFilesMovedOrNot_QA, new {   })*@
+                                @Html.CheckBoxFor(f => f.C_CCA_RelFilesMovedOrNot_QA, (ViewBag.UserRole).Contains("QA") ? new {   } : (object)new { @disabled = "disabled",   })
+
+                            Released Files moved to <u>\\CMS\Deployment-OPS\</u> @Html.TextBoxFor(f => f.C_CCA_RelFilesMovedToLoc_QA, new {})<br />
+
+                            Date: @Html.TextBoxFor(f => f.C_CCA_DateAndTime_QA, new { type = "date" })
+
+                        </fieldset>
+                    </div>
+
+                    <!--  Check Application  -->
+
+                    <h3><u>Part 3: Deployment Activites</u></h3>
+                    <div class="form-group" style="padding:10px">
+
+                        
+                            @*@Html.CheckBoxFor(f => f.FilesCopiedToDestination_Deployment, new {  , ViewBag.Readonly })*@
+                            @Html.CheckBoxFor(f => f.FilesCopiedToDestination_Deployment, (ViewBag.UserRole).Contains("Operations") ? new {   } : (object)new { @disabled = "disabled",   })
+
+                        All files mentioned in 'Released Files List' have been copied to the destination.<br />
+
+                       
+                            @*@Html.CheckBoxFor(f => f.FilesExecuted_Deployment, new {   })*@
+                            @Html.CheckBoxFor(f => f.FilesExecuted_Deployment, (ViewBag.UserRole).Contains("Operations") ? new {   } : (object)new { @disabled = "disabled",   })
+
+                        Files requiring execution as mentioned in the 'Release Files List' has been executed.<br />
+
+                        Deployed Succesfully: <br /><br />
+                        <b>Production</b>   @Html.RadioButtonFor(f => f.Production_Deployment, "Yes")  Yes  @Html.RadioButtonFor(f => f.Production_Deployment, "No")  No<br />
+                        <b>Failover Site</b>                   @Html.RadioButtonFor(f => f.FailoverSite_Deployment, "Yes")  Yes @Html.RadioButtonFor(f => f.FailoverSite_Deployment, "No")  No
+                        <br /><br /><br />
+
+                        <b>Comments:</b><br />
+
+
+                        <div style="width:100%;display:table">
+                            <div style="display:table-cell">
+                                <center><b><u>Deployed By</u></b></center>          <br />    <center>
+                                   
+                                        @*@Html.CheckBoxFor(f => f.DeployedBySign_Deployment, new {   })*@
+                                        @Html.CheckBoxFor(f => f.DeployedBySign_Deployment, (ViewBag.UserRole).Contains("Operations") ? new {   } : (object)new { @disabled = "disabled",   })
+
+                                    
+                                    Deployed by's Sign. <br />
+                                    @Html.TextBoxFor(f => f.DeployedByName_Deployment, new { placeholder = "Name (Deployed By)"})
+                                </center>
+                            </div>
+                            <div style="display:table-cell">
+                                <center><b><u>Unit In-charge</u></b></center>          <br />    <center>
+                                    
+                                        @*@Html.CheckBoxFor(f => f.UnitInchargeSign_Deployment, new {   })*@
+                                        @Html.CheckBoxFor(f => f.UnitInchargeSign_Deployment, ((ViewBag.UserRole).Contains("Operations") && ((ViewBag.UserRole).Contains("Team Lead"))) ? new {   } : (object)new { @disabled = "disabled",   })
+
+                                   
+                                    Unit In-charge Sign. <br />
+                                    @Html.TextBoxFor(f => f.UnitInchargeName_Deployment, new { placeholder = "Name (Unit Incharge)"})
+                                </center>
+
+                            </div>
+
+                            <div style="display:table-cell">
+                                <center><b><u>Department Head</u></b></center>          <br />    <center>
+                                   
+                                        @*@Html.CheckBoxFor(f => f.DepartmentHead_Deployment_Sign, new {   })*@
+                                        @Html.CheckBoxFor(f => f.DepartmentHead_Deployment_Sign, ((ViewBag.UserRole).Contains("Operations") && ((ViewBag.UserRole).Contains("Manager"))) ? new {   } : (object)new { @disabled = "disabled",   })
+
+                                  
+                                    Department Head Sign. <br />
+                                    @Html.TextBoxFor(f => f.DepartmentHead_Deployment_Name, new { placeholder = "Name (Department Head)"})
+                                </center>
+                            </div>
+
+                        </div>
+
+                        <br />
+
+                        Date: @Html.TextBoxFor(f => f.DateAndTime_Deployment, new { })
+
+                        <br /><br />
+
+                        <fieldset style="outline:double; padding:10px;margin:10px">
+                            <legend>Configuration and Controlling Activities</legend>
+                           
+                                @*@Html.CheckBoxFor(f => f.C_CCA_ChecklistConfirmed_Deployment, new {   })*@
+                                @Html.CheckBoxFor(f => f.C_CCA_ChecklistConfirmed_Deployment, (ViewBag.UserRole).Contains("QA") ? new {   } : (object)new { @disabled = "disabled",   })
+                            
+                            Part-III checklist checked and confirmed<br /><br />
+                            Date: @Html.TextBoxFor(f => f.C_CCA_DateAndTime_Deployment, new {  type = "date" })
+
+                            @*@Html.TextBoxFor(x => x.DateAndTime_Deployment, "{0:yyyy-MM-dd}", new { @type = "date", @Value = @ViewBag.fetchf.DateAndTime_Deployment })*@
+
+
+                        </fieldset>
+                        @Html.ActionLink("Features List", "FeaturesListPage")<br />
+                        @Html.ActionLink("Relesed Files", "ReleasedFilesPage")
+                    </div>
+                    @if (ViewBag.isBugReport == "yes")
+                    {
+
+                    }
+                    else
+                    {
+                        <button type="submit" style="float:right;height:30px;width:170px;border-radius:3px;width:60px;color:#ffffff;background-color:#00ff90">Save</button>
+                    }
+                </fieldset>
+
+            }
+
+        </div>
+        <footer class="sticky-footer">
+            <div class="container">
+                <div class="text-center">
+                    <small>Copyright © ZTBL 2017</small>
+                </div>
+            </div>
+        </footer>
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-Content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="@Url.Action("Logout","Home")">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript-->
+
+    </div>
+</body>
+
+</html>

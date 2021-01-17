@@ -1,0 +1,289 @@
+﻿@model ZTBL_VersionReleaseFormAutomation.Models.UATForm
+@using System.Collections.Generic
+@using System.Web.Optimization
+@{
+    Layout = null;
+}
+
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>SB Admin - Start Bootstrap Template</title>
+    <!-- Bootstrap core CSS-->
+    <link href="https://fonts.googleapis.com/css?family=Didact+Gothic" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Old+Standard+TT" rel="stylesheet">
+    <link href="~/Content/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    @Styles.Render("~/Content/vendor/bootstrap/css/bootstrap.min.css")
+    <!-- Custom fonts for this template-->
+    <link href="~/Content/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">*
+    @Styles.Render("~/Content/vendor/font-awesome/css/font-awesome.min.css")
+    <!-- Page level plugin CSS-->
+    <link href="~/Content/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+    @Styles.Render("~/Content/vendor/datatables/dataTables.bootstrap4.css")
+    <!-- Custom styles for this template-->
+    <link href="~/Content/css/sb-admin.css" rel="stylesheet">
+    @Styles.Render("~/Content/css/sb-admin.css")
+
+
+    <script src="~/Content/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/vendor/popper/popper.min.js"></script>
+    <script src="~/Content/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="~/Content/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="~/Content/vendor/chart.js/Chart.min.js"></script>
+    <script src="~/Content/vendor/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="~/Content/js/sb-admin.min.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="~/Content/js/sb-admin-datatables.min.js"></script>
+    <script src="~/Content/js/sb-admin-charts.min.js"></script>
+
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <img src="~/Content/logoztbl.jpg" height="50px" width="28px" style="border-radius:3px" />&nbsp;&nbsp;&nbsp;<a class="navbar-brand" href="@Url.Action("Dashboard","Home")">Version Release</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="@Url.Action("Dashboard","Home")">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Dashboard</span>
+                    </a>
+                </li>
+
+                @if ((ViewBag.UserRole).Contains("SDD") == true)
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="CreateNewForm">
+                        <a class="nav-link" href="@Url.Action("CreateNewVersionRelease","Home")">
+                            <i class="fa fa-fw fa-book"></i>
+                            <span class="nav-link-text">Create New Form</span>
+                        </a>
+                    </li>
+                }
+                @if ((ViewBag.UserRole).Contains("QA") == true)
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="CreateNewForm">
+                        <a class="nav-link" href="@Url.Action("CreateBugReport","Home")">
+                            <i class="fa fa-fw fa-book"></i>
+                            <span class="nav-link-text">Create Bug Report</span>
+                        </a>
+                    </li>
+                }
+
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="BugReports">
+                    <a class="nav-link" href="@Url.Action("BugReport","Home")">
+                        <i class="fa fa-fw fa-chain-broken"></i>
+                        <span class="nav-link-text">Bug Reports</span>
+                    </a>
+                </li>
+
+
+                @if (ViewBag.UserType == "Admin")
+                {
+                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Components">
+                        <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#collapseComponents" data-parent="#exampleAccordion">
+                            <i class="fa fa-fw fa-table"></i>
+                            <span class="nav-link-text">Admin Panel</span>
+                        </a>
+                        <ul class="sidenav-second-level collapse" id="collapseComponents">
+                            <li>
+                                <a href="@Url.Action("AdminPanel","Home")">See Users</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Register","Home")">Add New Users</a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ManageProject","Home")">Manage Projects</a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+
+
+            </ul>
+            <ul class="navbar-nav sidenav-toggler"></ul>
+            <ul class="navbar-nav ml-auto">
+
+                <li class="nav-item">
+                    <form class="form-inline my-2 my-lg-0 mr-lg-2">
+                        <div class="input-group">
+                            <input class="form-control" type="text" placeholder="Search for...">
+                            <span class="input-group-btn">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </form>
+                </li>
+                <li>
+
+                    <p style="color:white;padding-top:7px" id="nam">@ViewBag.Username, @ViewBag.UserRole </p>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
+                        <i class="fa fa-fw fa-sign-out"></i>Logout
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <div class="Content-wrapper">
+        <div class="container-fluid">
+            <!-- Breadcrumbs-->
+
+            <div style="display:table;width:100%;border:solid;padding-left:10px">
+                <div style="display: table-cell; width: 20%; border:thick;"><img src="~/Content/logoztbl.jpg" width="60px" height="80px" /></div>
+                <div style="display: table-cell; padding-left: 130px; width: 80%;border:thick;"><legend><b style="color:maroon;">User Acceptance Form</b></legend></div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <hr class="mt-2">
+                </div>
+                <div class="col-lg-4">
+                </div>
+            </div>
+            <!-- Example DataTables Card-->
+            <div id="ff">
+                @using (Ajax.BeginForm("CreateUserAcceptanceForm", "Home", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "ff" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <fieldset style="outline: thin; font-family: 'Didact Gothic', sans-serif; padding: 10px; margin: 0px; ">
+
+
+                        <div style="display:table;width:100%;outline:solid;padding:5px">
+                            <div style="display: table-row; padding:4px;outline:1px">
+                                <div style="display:table-cell;width:25%">Name Of Project</div>
+                                <div style="display:table-cell;width:25%">@ViewBag.UAT.ProjectName</div>
+                                @*                               <div style="display:table-cell;width:25%">@Html.DropDownListFor(model => model.ProjectId, (IEnumerable<SelectListItem>)ViewBag.Projects, "Select Project", new { @class = "form-control", id = "prjname", style = "width:200px;padding:0px;border-radius=0;margin:2px", required = "required" })</div>*@
+                            </div>
+                            <div style="display:table-row;padding:4px">
+                                <div style="display: table-cell; width: 25%">Version:</div>
+                                <div style="display: table-cell; width: 75%">@ViewBag.UAT.Version</div>
+                            </div>
+                            <div style="display: table-row; padding: 4px">
+                                <div style="display: table-cell; width: 25%">Functionalities/Tasks</div>
+                                <div style="display: table-cell; width: 75%">@ViewBag.UAT.Functionalities</div>
+                                @*                             <div style="display: table-cell; width: 75%">@Html.TextAreaFor(model => model.Functionalities, new { id = "verdes", @class = "form-control", style = "width:250px;padding:3px", placeholder = "Enter Description", required = "required", styles = "margin:2px" })</div>*@
+                            </div>
+                            <div style="display:table-row;padding:4px">
+                                <div style="display: table-cell; width: 25%">Date</div>
+                                <div style="display: table-cell; width: 75%">@ViewBag.UAT.Date</div>
+                            </div>
+                        </div>
+
+                        <br />
+                        <p>
+                            It is certified that the features/functionalities provided in <u><b id="projectName">@ViewBag.UAT.ProjectName</b></u> Software (Version: <b id="projectVersion"><u>@ViewBag.UAT.Version </u></b>) are in accordance with the approved version <b><u>@ViewBag.UAT.Version</u></b> of Requirement Specifications Document (RSD) of <b><u>@ViewBag.UAT.ProjectName</u></b> and is acceptable/fit for use.<br />
+                            In view of the above, it is requested that <u><b id="projectName2">@ViewBag.UAT.ProjectName</b></u> Software (Version: <u><b id="projectVersion2"> @ViewBag.UAT.Version</b></u>) installed and tested by UAT Team may please be placed in production so as to live-run for the future operations.
+                        </p>
+
+                        <center><a class="btn btn-primary" id="addReleased" href="@Url.Action("AddMemberToUAT","Home")">Add Member to UAT Team</a></center>
+                        <b style="font-size:20px">UAT Team</b>
+                        <table style="background-color: #828282; color: #f9f9f9; font-family: 'Raleway', sans-serif; " class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <td><b>S No.</b></td>
+                                    <td><b>PP No</b></td>
+                                    <td><b>Name</b></td>
+                                    <td><b>Designation</b></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @*                                     //onclick="@("window.location.href='" + @Url.Action("FormPage", "Home", new { fid = item.FormId }) + "'");"*@
+                                <tr class="unread">
+                                    @*<td class="view-message  dont-show">@Html.DisplayFor(modelItem => item.FormId)</td>*@
+                                    <td class="view-message dont-show"></td>
+                                    <td class="view-message dont-show"></td>
+                                    <td class="view-message dont-show"> </td>
+                                    <td class="view-message  inbox-small-cells"></td>
+                                </tr>
+                                <!-- Delete Modal -->
+                                <!-- Delete Modal -->
+                            </tbody>
+                        </table>
+
+                        <div style="display:table;width:100%;outline:solid;padding:5px">
+                            <div style="display: table-row; padding:4px;outline:1px">
+                                <div style="display:table-cell"><b>Department:</b> @ViewBag.UAT.Department</div>
+                                <div style="display:table-cell"></div>
+                            </div>
+                            <div style="display: table-row; padding: 4px">
+                                <div style="display:table-cell"><b>SVP/Departmental Head</b></div>
+                                <div style="display:table-cell"></div>
+                            </div>
+                            <div style="display:table-row;padding:4px">
+                                <div style="display:table-cell;padding-bottom:3px"><b>PP No:</b> @ViewBag.UAT.SVP_PPNo</div>
+                                <div style="display:table-cell"></div>
+                                <div style="display: table-cell; padding-bottom: 3px"><b>Name:</b> @ViewBag.UAT.SVP_Name</div>
+                                <div style="display:table-cell"></div>
+                                <div style="display: table-cell; padding-bottom: 3px"><b>Designation:</b> @ViewBag.UAT.SVP_Designation</div>
+                                <div style="display:table-cell"></div>
+                            </div>
+                        </div>
+                        <br />
+                        <p style="text-align:center">
+                        </p>
+
+                        <!--   Check Application -->
+                        @if (ViewBag.isBugReport == "yes")
+                        {
+
+                        }
+                        else
+                        {
+                            <center><button type="submit" class="btn btn-outline-success" style="width:120px">Save</button></center>
+                        }
+                    </fieldset>
+
+                }
+            </div>
+
+        </div>
+        <footer class="sticky-footer">
+            <div class="container">
+                <div class="text-center">
+                    <small>Copyright © ZTBL 2017</small>
+                </div>
+            </div>
+        </footer>
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fa fa-angle-up"></i>
+        </a>
+        <!-- Logout Modal-->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-Content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" href="@Url.Action("Logout","Home")">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Bootstrap core JavaScript-->
+
+    </div>
+</body>
+
+</html>

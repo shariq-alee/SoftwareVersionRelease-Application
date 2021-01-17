@@ -1,0 +1,221 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DatabaseZTBLModelStoreContainer" CdmEntityContainer="DatabaseZTBLEntities">
+    <EntitySetMapping Name="BugReports">
+      <EntityTypeMapping TypeName="DatabaseZTBLModel.BugReport">
+        <MappingFragment StoreEntitySet="BugReport">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FormId" ColumnName="FormId" />
+          <ScalarProperty Name="Bug_Report_ID" ColumnName="Bug Report ID" />
+          <ScalarProperty Name="BR_Holder" ColumnName="BR_Holder" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="Version_Release" ColumnName="Version/Release" />
+          <ScalarProperty Name="TestingType" ColumnName="TestingType" />
+          <ScalarProperty Name="TesterName" ColumnName="TesterName" />
+          <ScalarProperty Name="TestingCycle" ColumnName="TestingCycle" />
+          <ScalarProperty Name="Reviewer" ColumnName="Reviewer" />
+          <ScalarProperty Name="Data_Severity" ColumnName="Data_Severity" />
+          <ScalarProperty Name="Data_Priority" ColumnName="Data_Priority" />
+          <ScalarProperty Name="Data_QAStatus" ColumnName="Data_QAStatus" />
+          <ScalarProperty Name="Data_DevelopmentStatus" ColumnName="Data_DevelopmentStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BugReportTables">
+      <EntityTypeMapping TypeName="DatabaseZTBLModel.BugReportTable">
+        <MappingFragment StoreEntitySet="BugReportTable">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Table_BugId" ColumnName="Table_BugId" />
+          <ScalarProperty Name="BugReportId" ColumnName="BugReportId" />
+          <ScalarProperty Name="Table_BugTitle" ColumnName="Table_BugTitle" />
+          <ScalarProperty Name="Table_BugDescription" ColumnName="Table_BugDescription" />
+          <ScalarProperty Name="Table_ReportingDate" ColumnName="Table_ReportingDate" />
+          <ScalarProperty Name="Table_Severirty" ColumnName="Table_Severirty" />
+          <ScalarProperty Name="Table_DevStatus" ColumnName="Table_DevStatus" />
+          <ScalarProperty Name="Table_QAStatus" ColumnName="Table_QAStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FormDatas">
+      <EntityTypeMapping TypeName="DatabaseZTBLModel.FormData">
+        <MappingFragment StoreEntitySet="FormData">
+          <ScalarProperty Name="FormId" ColumnName="FormId" />
+          <ScalarProperty Name="SFLandRFLisAttached" ColumnName="SFLandRFLisAttached" />
+          <ScalarProperty Name="CpybaselineProvided" ColumnName="CpybaselineProvided" />
+          <ScalarProperty Name="VSSLabel" ColumnName="VSSLabel" />
+          <ScalarProperty Name="RelFoldersLabeled" ColumnName="RelFoldersLabeled" />
+          <ScalarProperty Name="RelFilesLocation" ColumnName="RelFilesLocation" />
+          <ScalarProperty Name="RelFilesPlaced" ColumnName="RelFilesPlaced" />
+          <ScalarProperty Name="UnitTestingDone" ColumnName="UnitTestingDone" />
+          <ScalarProperty Name="CodingStdFollowed" ColumnName="CodingStdFollowed" />
+          <ScalarProperty Name="PeerReview" ColumnName="PeerReview" />
+          <ScalarProperty Name="PeerReviewValues" ColumnName="PeerReviewValues" />
+          <ScalarProperty Name="LeadDeveloperName_SDD" ColumnName="LeadDeveloperName_SDD" />
+          <ScalarProperty Name="LeadDeveloperSign_SDD" ColumnName="LeadDeveloperSign_SDD" />
+          <ScalarProperty Name="UnitInchargeName_SDD" ColumnName="UnitInchargeName_SDD" />
+          <ScalarProperty Name="UnitInchargeSign_SDD" ColumnName="UnitInchargeSign_SDD" />
+          <ScalarProperty Name="DepartmentHeadName_SDD" ColumnName="DepartmentHeadName_SDD" />
+          <ScalarProperty Name="DepartmentHeadSign_SDD" ColumnName="DepartmentHeadSign_SDD" />
+          <ScalarProperty Name="DateAndTime_SDD" ColumnName="DateAndTime_SDD" />
+          <ScalarProperty Name="C_CCA_ChecklistChecked_SDD" ColumnName="(CCA)ChecklistChecked_SDD" />
+          <ScalarProperty Name="C_CCA_RelFilesMovedToLoc_SDD" ColumnName="(CCA)RelFilesMovedToLoc_SDD" />
+          <ScalarProperty Name="C_CCA_RelFilesMovedOrNot_SDD" ColumnName="(CCA)RelFilesMovedOrNot_SDD" />
+          <ScalarProperty Name="C_CCA_DateAndTime_SDD" ColumnName="(CCA)DateAndTime_SDD" />
+          <ScalarProperty Name="C_CCA_Sign_SDD" ColumnName="(CCA)Sign_SDD" />
+          <ScalarProperty Name="DiscoveredBugsReported" ColumnName="DiscoveredBugsReported" />
+          <ScalarProperty Name="DiscoveredBugsReportedRepNo" ColumnName="DiscoveredBugsReportedRepNo" />
+          <ScalarProperty Name="QATeamSatisfied" ColumnName="QATeamSatisfied" />
+          <ScalarProperty Name="SWStabilityComment_QA" ColumnName="SWStabilityComment_QA" />
+          <ScalarProperty Name="LeadName_QA" ColumnName="LeadName_QA" />
+          <ScalarProperty Name="LeadSign_QA" ColumnName="LeadSign_QA" />
+          <ScalarProperty Name="ManagerName_QA" ColumnName="ManagerName_QA" />
+          <ScalarProperty Name="ManagerSign_QA" ColumnName="ManagerSign_QA" />
+          <ScalarProperty Name="DateAndTime_QA" ColumnName="DateAndTime_QA" />
+          <ScalarProperty Name="C_CCA_ChecklistChecked_QA" ColumnName="(CCA)ChecklistChecked_QA" />
+          <ScalarProperty Name="C_CCA_RelFilesMovedToLoc_QA" ColumnName="(CCA)RelFilesMovedToLoc_QA" />
+          <ScalarProperty Name="C_CCA_RelFilesMovedOrNot_QA" ColumnName="(CCA)RelFilesMovedOrNot_QA" />
+          <ScalarProperty Name="C_CCA_DateAndTime_QA" ColumnName="(CCA)DateAndTime_QA" />
+          <ScalarProperty Name="C_CCA_Sign_QA" ColumnName="(CCA)Sign_QA" />
+          <ScalarProperty Name="FilesCopiedToDestination_Deployment" ColumnName="FilesCopiedToDestination_Deployment" />
+          <ScalarProperty Name="FilesExecuted_Deployment" ColumnName="FilesExecuted_Deployment" />
+          <ScalarProperty Name="Production_Deployment" ColumnName="Production_Deployment" />
+          <ScalarProperty Name="FailoverSite_Deployment" ColumnName="FailoverSite_Deployment" />
+          <ScalarProperty Name="DeployedByName_Deployment" ColumnName="DeployedByName_Deployment" />
+          <ScalarProperty Name="DeployedBySign_Deployment" ColumnName="DeployedBySign_Deployment" />
+          <ScalarProperty Name="UnitInchargeName_Deployment" ColumnName="UnitInchargeName_Deployment" />
+          <ScalarProperty Name="UnitInchargeSign_Deployment" ColumnName="UnitInchargeSign_Deployment" />
+          <ScalarProperty Name="DepartmentHead_Deployment_Sign" ColumnName="DepartmentHead_Deployment_Sign" />
+          <ScalarProperty Name="DepartmentHead_Deployment_Name" ColumnName="DepartmentHead_Deployment_Name" />
+          <ScalarProperty Name="DateAndTime_Deployment" ColumnName="DateAndTime_Deployment" />
+          <ScalarProperty Name="C_CCA_ChecklistConfirmed_Deployment" ColumnName="(CCA)ChecklistConfirmed_Deployment" />
+          <ScalarProperty Name="C_CCA_DateAndTime_Deployment" ColumnName="(CCA)DateAndTime_Deployment" />
+          <ScalarProperty Name="C_CCA_Sign_Deployment" ColumnName="(CCA)Sign_Deployment" />
+          <ScalarProperty Name="FormHolder" ColumnName="FormHolder" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="VersionNo" ColumnName="VersionNo" />
+          <ScalarProperty Name="VersionDescription" ColumnName="VersionDescription" />
+          <ScalarProperty Name="VersionDate" ColumnName="VersionDate" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="DatabaseZTBLModel.Project">
+        <MappingFragment StoreEntitySet="Project">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="ProjectDescription" ColumnName="ProjectDescription" />
+          <ScalarProperty Name="Manager_SDD" ColumnName="Manager_SDD" />
+          <ScalarProperty Name="UnitIncharge_SDD" ColumnName="UnitIncharge_SDD" />
+          <ScalarProperty Name="LeadDeveloper_SDD" ColumnName="LeadDeveloper_SDD" />
+          <ScalarProperty Name="Manager_QA" ColumnName="Manager_QA" />
+          <ScalarProperty Name="UnitIncharge_QA" ColumnName="UnitIncharge_QA" />
+          <ScalarProperty Name="Manager_Operations" ColumnName="Manager_Operations" />
+          <ScalarProperty Name="UnitIncharge_Operations_" ColumnName="UnitIncharge_Operations_" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ReleasedFilesLists">
+      <EntityTypeMapping TypeName="DatabaseZTBLModel.ReleasedFilesList">
+        <MappingFragment StoreEntitySet="ReleasedFilesList">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FormId" ColumnName="FormId" />
+          <ScalarProperty Name="S_No_" ColumnName="S.No." />
+          <ScalarProperty Name="FilenameWithPath" ColumnName="FilenameWithPath" />
+          <ScalarProperty Name="FileType" ColumnName="FileType" />
+          <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+          <ScalarProperty Name="Size" ColumnName="Size" />
+          <ScalarProperty Name="TotalFilesAttached" ColumnName="TotalFilesAttached" />
+          <ScalarProperty Name="LeadDeveloperSign" ColumnName="LeadDeveloperSign" />
+          <ScalarProperty Name="UnitInchargeSign" ColumnName="UnitInchargeSign" />
+          <ScalarProperty Name="DepartmentHeadSign" ColumnName="DepartmentHeadSign" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SoftwareFeatureLists">
+      <EntityTypeMapping TypeName="DatabaseZTBLModel.SoftwareFeatureList">
+        <MappingFragment StoreEntitySet="SoftwareFeatureList">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FormId" ColumnName="FormId" />
+          <ScalarProperty Name="S_No_" ColumnName="S.No." />
+          <ScalarProperty Name="ImplemetedFeatures" ColumnName="ImplemetedFeatures" />
+          <ScalarProperty Name="LeadDeveloperSign" ColumnName="LeadDeveloperSign" />
+          <ScalarProperty Name="UnitInchargeSign" ColumnName="UnitInchargeSign" />
+          <ScalarProperty Name="DepartmentHeadSign" ColumnName="DepartmentHeadSign" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UAT_Teams">
+      <EntityTypeMapping TypeName="DatabaseZTBLModel.UAT_Team">
+        <MappingFragment StoreEntitySet="UAT Team">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UATFormId" ColumnName="UATFormId" />
+          <ScalarProperty Name="PPNo" ColumnName="PPNo" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UAT_Teams1">
+      <EntityTypeMapping TypeName="DatabaseZTBLModel.UAT_Team1">
+        <MappingFragment StoreEntitySet="UAT Teams">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UATFormId" ColumnName="UATFormId" />
+          <ScalarProperty Name="PPNo" ColumnName="PPNo" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UATForms">
+      <EntityTypeMapping TypeName="DatabaseZTBLModel.UATForm">
+        <MappingFragment StoreEntitySet="UATForm">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="Functionalities" ColumnName="Functionalities" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Department" ColumnName="Department" />
+          <ScalarProperty Name="SVP_Name" ColumnName="SVP_Name" />
+          <ScalarProperty Name="SVP_PPNo" ColumnName="SVP_PPNo" />
+          <ScalarProperty Name="SVP_Designation" ColumnName="SVP_Designation" />
+          <ScalarProperty Name="Holder_PPNo" ColumnName="Holder_PPNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="DatabaseZTBLModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="PPNumber" ColumnName="PPNumber" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Designation" ColumnName="Designation" />
+          <ScalarProperty Name="UserType" ColumnName="UserType" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+          <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+          <ScalarProperty Name="UserRole" ColumnName="UserRole" />
+          <ScalarProperty Name="Boss" ColumnName="Boss" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Forms">
+      <EntityTypeMapping TypeName="DatabaseZTBLModel.Form">
+        <MappingFragment StoreEntitySet="Form">
+          <ScalarProperty Name="FormIdd" ColumnName="FormIdd" />
+          <ScalarProperty Name="FormHolder" ColumnName="FormHolder" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="VersionNo" ColumnName="VersionNo" />
+          <ScalarProperty Name="VersionDescription" ColumnName="VersionDescription" />
+          <ScalarProperty Name="VersionDate" ColumnName="VersionDate" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

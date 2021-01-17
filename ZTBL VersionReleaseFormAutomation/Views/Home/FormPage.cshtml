@@ -1,0 +1,107 @@
+﻿@model ZTBL_VersionReleaseFormAutomation.Models.FormData
+@using System.Web.Optimization
+@using System.Collections.Generic
+@{
+    ViewBag.Title = "FormPage";
+    @Scripts.Render("~/Scripts/CreateForm.js");
+    @Styles.Render("~/Content/dashboardStyle.css")
+    @Scripts.Render("~/Scripts/jquery-1.9.1.min.js")
+    @Styles.Render("~/Content/bootstrap.min.css")
+    @Styles.Render("~/Content/Styles1.css");
+}
+
+<head>
+    <title>Form</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {@Html.AntiForgeryToken()
+
+        <fieldset style="outline:solid; padding:10px;margin:10px">
+
+            <center><legend>Version Release </legend></center>Form ID: @ViewBag.formIid
+            <br />
+            @Html.ActionLink("ReleasedFiles", "ReleasedFilesPage")
+            <br />
+            @Html.ActionLink("Implemented Features", "FeaturesListPage")
+            <h3><u>Part 1: Development Activities</u></h3>
+            <div class="form-group" style="padding:10px">
+
+
+
+                @Html.CheckBoxFor(f => f.SFLandRFLisAttached, new { @checked = @ViewBag.fetchf.SFLandRFLisAttached}) "Software Feature List" and "Released Files List" is attached.<br />
+                @Html.CheckBoxFor(f => f.CpybaselineProvided, new { @checked = @ViewBag.fetchf.CpybaselineProvided}) Copy of baseline document (i.e. RSD, User Request etc) is provided.<br />
+                @Html.CheckBoxFor(f => f.RelFoldersLabeled, new { @checked = @ViewBag.fetchf.RelFoldersLabeled }) Released related folders/files have been labeled in VSS. ( VSS Label):   @Html.TextBoxFor(f => f.VSSLabel, new { style = "height:19px" })<br />
+                @Html.CheckBoxFor(f => f.RelFilesPlaced, new { @checked = @ViewBag.fetchf.RelFilesPlaced })The Released Files are placed at location <u>\\CMS\Deployment-SDD\</u>     @Html.TextBoxFor(f => f.RelFilesLocation, new { style = "height:19px" }) <br />
+                @Html.CheckBoxFor(f => f.UnitTestingDone, new { @checked = @ViewBag.fetchf.UnitTestingDone }) Unit Testing Done. <br />
+                @Html.CheckBoxFor(f => f.CodingStdFollowed, new { @checked = @ViewBag.fetchf.CodingStdFollowed }) Coding Guidelines/standards followed.<br />
+                @Html.CheckBoxFor(f => f.PeerReview) Peer Review(s) [ @Html.RadioButtonFor(f => f.PeerReviewValues, "Conducted") Conducted        @Html.RadioButtonFor(f => f.PeerReviewValues, "NotRequired") Not Required  ]
+                <br /><br /><br />
+
+                <b>Comments:</b><br />
+                <center><b><u>Lead Developer</u></b></center>          <br />    <center>    @Html.CheckBoxFor(f => f.LeadDeveloperSign_SDD) Lead Developer Sign. <br /> @Html.TextBoxFor(f => f.LeadDeveloperName_SDD, new { placeholder = "Name (Lead Developer)" })</center><br />
+
+                <center><b><u>Unit Incharge</u></b></center>          <br />    <center>    @Html.CheckBoxFor(f => f.UnitInchargeSign_SDD) Unit Incharge Sign. <br /> @Html.TextBoxFor(f => f.UnitInchargeName_SDD, new { placeholder = "Name (Unit Incharge)" })</center><br />
+
+                <center><b><u>Department Head</u></b></center>          <br />    <center>    @Html.CheckBoxFor(f => f.DepartmentHeadSign_SDD) Department Head Sign. <br /> @Html.TextBoxFor(f => f.DepartmentHeadName_SDD, new { placeholder = "Name (Department Head)" })</center><br />
+
+                <b>Date:</b> <input type="date" placeholder="@DateTime.Now.ToString("yyyy-mm-dd")" /><br />
+
+                <fieldset style="outline:double; padding:10px;margin:10px">
+                    <legend>Configuration and Controlling Activities</legend>
+                    @Html.CheckBoxFor(f => f.C_CCA_ChecklistChecked_SDD) Part-I checklist checked and confirmed<br />
+                    @Html.CheckBoxFor(f => f.C_CCA_RelFilesMovedOrNot_SDD) Released Files moved to <u>\\CMS\Deployment-QAD\</u> @Html.TextBoxFor(f => f.C_CCA_RelFilesMovedToLoc_SDD)<br />
+                    Date: <input type="date" placeholder="@DateTime.Now.ToString("yyyy-mm-dd")" />
+                </fieldset>
+            </div>
+            <br /><br />
+            <h3><u>Part 2: QA Activities</u></h3>
+            <div class="form-group" style="padding:10px">
+
+
+
+                @Html.CheckBoxFor(f => f.DiscoveredBugsReported) Discovered bugs have been reported vide bug Report No. @Html.TextBoxFor(f => f.DiscoveredBugsReportedRepNo, new { style = "height:19px" })<br />
+                @Html.CheckBoxFor(f => f.QATeamSatisfied) QA team satisfied with this release.<br />
+                Software Stability: <br /><br />
+                @Html.RadioButtonFor(f => f.SWStabilityComment_QA, "RequiresAnotherQACycle") Requires Another QA Cycle  @Html.RadioButtonFor(f => f.SWStabilityComment_QA, "Deployable")  Deployable
+                <br /><br /><br />
+
+                <b>Comments:</b><br />
+                <center><b><u>QA Lead</u></b></center>          <br />    <center>    @Html.CheckBoxFor(f => f.LeadSign_QA) QA Lead Sign. <br /> @Html.TextBoxFor(f => f.LeadName_QA, new { placeholder = "Name (QA Lead)" })</center><br />
+
+                <center><b><u>QA Manager</u></b></center>          <br />    <center>    @Html.CheckBoxFor(f => f.ManagerSign_QA) QA Manager Sign. <br /> @Html.TextBoxFor(f => f.ManagerName_QA, new { placeholder = "Name (QA Manager)" })</center><br />
+                <br /><br />
+                <fieldset style="outline:double; padding:10px;margin:10px">
+                    <legend>Configuration and Controlling Activities</legend>
+                    @Html.CheckBoxFor(f => f.C_CCA_ChecklistChecked_QA) Part-II checklist checked and confirmed<br />
+                    @Html.CheckBoxFor(f => f.C_CCA_RelFilesMovedOrNot_QA) Released Files moved to <u>\\CMS\Deployment-OPS\</u> @Html.TextBoxFor(f => f.C_CCA_RelFilesMovedToLoc_QA)<br />
+                    Date: <input type="date" placeholder="@DateTime.Now.ToString("yyyy-mm-dd")" />
+                </fieldset>
+            </div>
+            <h3><u>Part 3: Deployment Activites</u></h3>
+            <div class="form-group" style="padding:10px">
+
+                @Html.CheckBoxFor(f => f.FilesCopiedToDestination_Deployment) All files mentioned in 'Released Files List' have been copied to the destination.<br />
+                @Html.CheckBoxFor(f => f.FilesExecuted_Deployment) Files requuiring execution as mentioned in the 'Release Files List' has been executed.<br />
+                Deployed Succesfully: <br /><br />
+                <b>Production</b>   @Html.RadioButtonFor(f => f.Production_Deployment, "Yes")  Yes  @Html.RadioButtonFor(f => f.Production_Deployment, "No")  No<br />
+                <b>Failover Site</b>                    @Html.RadioButtonFor(f => f.FailoverSite_Deployment, "Yes")  Yes @Html.RadioButtonFor(f => f.FailoverSite_Deployment, "No")  No
+                <br /><br /><br />
+
+                <b>Comments:</b><br />
+                <center><b><u>Deployed By</u></b></center>          <br />    <center>    @Html.CheckBoxFor(f => f.DeployedBySign_Deployment) Deployed by's Sign. <br /> @Html.TextBoxFor(f => f.DeployedByName_Deployment, new { placeholder = "Name (Deployed By)" })</center><br />
+
+                <center><b><u>Unit In-charge</u></b></center>          <br />    <center>    @Html.CheckBoxFor(f => f.UnitInchargeSign_Deployment) Unit In-charge Sign. <br /> @Html.TextBoxFor(f => f.UnitInchargeName_Deployment, new { placeholder = "Name (Unit Incharge)" })</center><br />
+                <center><b><u>Department Head</u></b></center>          <br />    <center>    @Html.CheckBoxFor(f => f.DepartmentHead_Deployment_Sign) Department Head Sign. <br /> @Html.TextBoxFor(f => f.DepartmentHead_Deployment_Name, new { placeholder = "Name (Department Head)" })</center><br />
+                Date: <input type="date" placeholder="@DateTime.Now.ToString("yyyy-mm-dd")" />
+                <br /><br />
+                <fieldset style="outline:double; padding:10px;margin:10px">
+                    <legend>Configuration and Controlling Activities</legend>
+                    @Html.CheckBoxFor(f => f.C_CCA_ChecklistConfirmed_Deployment) Part-III checklist checked and confirmed<br /><br />
+                    Date: <input type="date" placeholder="@DateTime.Now.ToString("yyyy-mm-dd")" />
+                </fieldset>
+            </div>
+
+            <button type="submit" style="float:right;height:30px;width:170px;border-radius:3px;width:60px;color:#ffffff;background-color:#00ff90">Save</button>
+        </fieldset>
+    }

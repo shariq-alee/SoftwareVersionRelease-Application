@@ -1,0 +1,233 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DatabaseZTBLModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BugReport">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FormId" Type="int" />
+    <Property Name="Bug Report ID" Type="varchar" MaxLength="25" />
+    <Property Name="BR_Holder" Type="varchar" MaxLength="25" />
+    <Property Name="Date" Type="varchar" MaxLength="25" />
+    <Property Name="ProjectID" Type="varchar" MaxLength="50" />
+    <Property Name="ProjectName" Type="varchar" MaxLength="50" />
+    <Property Name="Version/Release" Type="varchar" MaxLength="50" />
+    <Property Name="TestingType" Type="varchar" MaxLength="50" />
+    <Property Name="TesterName" Type="varchar" MaxLength="50" />
+    <Property Name="TestingCycle" Type="varchar" MaxLength="50" />
+    <Property Name="Reviewer" Type="varchar" MaxLength="250" />
+    <Property Name="Data_Severity" Type="varchar" MaxLength="250" />
+    <Property Name="Data_Priority" Type="varchar" MaxLength="250" />
+    <Property Name="Data_QAStatus" Type="varchar" MaxLength="50" />
+    <Property Name="Data_DevelopmentStatus" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="BugReportTable">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Table_BugId" Type="int" Nullable="false" />
+    <Property Name="BugReportId" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Table_BugTitle" Type="varchar" MaxLength="250" />
+    <Property Name="Table_BugDescription" Type="varchar" MaxLength="250" />
+    <Property Name="Table_ReportingDate" Type="varchar" MaxLength="20" />
+    <Property Name="Table_Severirty" Type="varchar" MaxLength="250" />
+    <Property Name="Table_DevStatus" Type="varchar" MaxLength="250" />
+    <Property Name="Table_QAStatus" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view '66AC7B2A5CEC00B1061891E231BF0B38_S\ZTBL VERSIONRELEASEFORMAUTOMATION\ZTBL VERSIONRELEASEFORMAUTOMATION\APP_DATA\DATABASEZTBL.MDF.dbo.Form' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="Form">
+    <Key>
+      <PropertyRef Name="FormIdd" />
+    </Key>
+    <Property Name="FormIdd" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FormHolder" Type="varchar" MaxLength="50" />
+    <Property Name="ProjectName" Type="varchar" MaxLength="50" />
+    <Property Name="VersionNo" Type="varchar" MaxLength="50" />
+    <Property Name="VersionDescription" Type="varchar" MaxLength="50" />
+    <Property Name="VersionDate" Type="varchar" MaxLength="50" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="FormData">
+    <Key>
+      <PropertyRef Name="FormId" />
+    </Key>
+    <Property Name="FormId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SFLandRFLisAttached" Type="bit" Nullable="false" />
+    <Property Name="CpybaselineProvided" Type="bit" Nullable="false" />
+    <Property Name="VSSLabel" Type="varchar" MaxLength="50" />
+    <Property Name="RelFoldersLabeled" Type="bit" Nullable="false" />
+    <Property Name="RelFilesLocation" Type="varchar" MaxLength="50" />
+    <Property Name="RelFilesPlaced" Type="bit" Nullable="false" />
+    <Property Name="UnitTestingDone" Type="bit" Nullable="false" />
+    <Property Name="CodingStdFollowed" Type="bit" Nullable="false" />
+    <Property Name="PeerReview" Type="bit" Nullable="false" />
+    <Property Name="PeerReviewValues" Type="varchar" MaxLength="50" />
+    <Property Name="LeadDeveloperName_SDD" Type="varchar" MaxLength="50" />
+    <Property Name="LeadDeveloperSign_SDD" Type="bit" Nullable="false" />
+    <Property Name="UnitInchargeName_SDD" Type="varchar" MaxLength="50" />
+    <Property Name="UnitInchargeSign_SDD" Type="bit" Nullable="false" />
+    <Property Name="DepartmentHeadName_SDD" Type="varchar" MaxLength="50" />
+    <Property Name="DepartmentHeadSign_SDD" Type="bit" Nullable="false" />
+    <Property Name="DateAndTime_SDD" Type="varchar" MaxLength="20" />
+    <Property Name="(CCA)ChecklistChecked_SDD" Type="bit" Nullable="false" />
+    <Property Name="(CCA)RelFilesMovedToLoc_SDD" Type="varchar" MaxLength="50" />
+    <Property Name="(CCA)RelFilesMovedOrNot_SDD" Type="bit" Nullable="false" />
+    <Property Name="(CCA)DateAndTime_SDD" Type="varchar" MaxLength="20" />
+    <Property Name="(CCA)Sign_SDD" Type="bit" Nullable="false" />
+    <Property Name="DiscoveredBugsReported" Type="bit" Nullable="false" />
+    <Property Name="DiscoveredBugsReportedRepNo" Type="varchar" MaxLength="50" />
+    <Property Name="QATeamSatisfied" Type="bit" Nullable="false" />
+    <Property Name="SWStabilityComment_QA" Type="varchar" MaxLength="50" />
+    <Property Name="LeadName_QA" Type="varchar" MaxLength="50" />
+    <Property Name="LeadSign_QA" Type="bit" Nullable="false" />
+    <Property Name="ManagerName_QA" Type="varchar" MaxLength="50" />
+    <Property Name="ManagerSign_QA" Type="bit" Nullable="false" />
+    <Property Name="DateAndTime_QA" Type="varchar" MaxLength="20" />
+    <Property Name="(CCA)ChecklistChecked_QA" Type="bit" Nullable="false" />
+    <Property Name="(CCA)RelFilesMovedToLoc_QA" Type="varchar" MaxLength="50" />
+    <Property Name="(CCA)RelFilesMovedOrNot_QA" Type="bit" Nullable="false" />
+    <Property Name="(CCA)DateAndTime_QA" Type="varchar" MaxLength="50" />
+    <Property Name="(CCA)Sign_QA" Type="bit" Nullable="false" />
+    <Property Name="FilesCopiedToDestination_Deployment" Type="bit" Nullable="false" />
+    <Property Name="FilesExecuted_Deployment" Type="bit" Nullable="false" />
+    <Property Name="Production_Deployment" Type="varchar" MaxLength="50" />
+    <Property Name="FailoverSite_Deployment" Type="varchar" MaxLength="50" />
+    <Property Name="DeployedByName_Deployment" Type="varchar" MaxLength="50" />
+    <Property Name="DeployedBySign_Deployment" Type="bit" Nullable="false" />
+    <Property Name="UnitInchargeName_Deployment" Type="varchar" MaxLength="50" />
+    <Property Name="UnitInchargeSign_Deployment" Type="bit" Nullable="false" />
+    <Property Name="DepartmentHead_Deployment_Sign" Type="bit" Nullable="false" />
+    <Property Name="DepartmentHead_Deployment_Name" Type="varchar" MaxLength="50" />
+    <Property Name="DateAndTime_Deployment" Type="varchar" MaxLength="20" />
+    <Property Name="(CCA)ChecklistConfirmed_Deployment" Type="bit" Nullable="false" />
+    <Property Name="(CCA)DateAndTime_Deployment" Type="varchar" MaxLength="20" />
+    <Property Name="(CCA)Sign_Deployment" Type="bit" Nullable="false" />
+    <Property Name="FormHolder" Type="varchar" MaxLength="50" />
+    <Property Name="ProjectName" Type="varchar" MaxLength="50" />
+    <Property Name="VersionNo" Type="varchar" MaxLength="50" />
+    <Property Name="VersionDescription" Type="varchar" MaxLength="50" />
+    <Property Name="VersionDate" Type="varchar" MaxLength="50" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="ProjectId" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectName" Type="varchar" MaxLength="50" />
+    <Property Name="Version" Type="varchar" MaxLength="20" />
+    <Property Name="ProjectDescription" Type="varchar" MaxLength="250" />
+    <Property Name="Manager_SDD" Type="varchar" MaxLength="50" />
+    <Property Name="UnitIncharge_SDD" Type="varchar" MaxLength="50" />
+    <Property Name="LeadDeveloper_SDD" Type="varchar" MaxLength="50" />
+    <Property Name="Manager_QA" Type="varchar" MaxLength="50" />
+    <Property Name="UnitIncharge_QA" Type="varchar" MaxLength="50" />
+    <Property Name="Manager_Operations" Type="varchar" MaxLength="50" />
+    <Property Name="UnitIncharge_Operations_" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ReleasedFilesList">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FormId" Type="int" Nullable="false" />
+    <Property Name="S.No." Type="int" Nullable="false" />
+    <Property Name="FilenameWithPath" Type="varchar" MaxLength="250" />
+    <Property Name="FileType" Type="varchar" MaxLength="50" />
+    <Property Name="DateTime" Type="varchar" MaxLength="20" />
+    <Property Name="Size" Type="varchar" MaxLength="50" />
+    <Property Name="TotalFilesAttached" Type="varchar" MaxLength="20" />
+    <Property Name="LeadDeveloperSign" Type="binary" MaxLength="50" />
+    <Property Name="UnitInchargeSign" Type="binary" MaxLength="50" />
+    <Property Name="DepartmentHeadSign" Type="binary" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="SoftwareFeatureList">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FormId" Type="int" Nullable="false" />
+    <Property Name="S.No." Type="int" Nullable="false" />
+    <Property Name="ImplemetedFeatures" Type="varchar" MaxLength="350" />
+    <Property Name="LeadDeveloperSign" Type="varbinary" MaxLength="50" />
+    <Property Name="UnitInchargeSign" Type="varbinary" MaxLength="350" />
+    <Property Name="DepartmentHeadSign" Type="varbinary" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="UAT Team">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="UATFormId" Type="int" Nullable="false" />
+    <Property Name="PPNo" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Designation" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="UAT Teams">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="UATFormId" Type="int" Nullable="false" />
+    <Property Name="PPNo" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="Designation" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="UATForm">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProjectId" Type="int" />
+    <Property Name="ProjectName" Type="varchar" MaxLength="100" />
+    <Property Name="Functionalities" Type="varchar" MaxLength="100" />
+    <Property Name="Version" Type="varchar" MaxLength="15" />
+    <Property Name="Date" Type="date" />
+    <Property Name="Department" Type="varchar" MaxLength="100" />
+    <Property Name="SVP_Name" Type="varchar" MaxLength="100" />
+    <Property Name="SVP_PPNo" Type="varchar" MaxLength="50" />
+    <Property Name="SVP_Designation" Type="varchar" MaxLength="50" />
+    <Property Name="Holder_PPNo" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="PPNumber" />
+    </Key>
+    <Property Name="PPNumber" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="30" />
+    <Property Name="Email" Type="varchar" MaxLength="35" />
+    <Property Name="Password" Type="varchar" MaxLength="100" />
+    <Property Name="Designation" Type="varchar" MaxLength="25" />
+    <Property Name="UserType" Type="varchar" MaxLength="10" />
+    <Property Name="PasswordSalt" Type="varchar" MaxLength="100" />
+    <Property Name="LastLogin" Type="varchar" MaxLength="25" />
+    <Property Name="UserRole" Type="varchar" MaxLength="35" />
+    <Property Name="Boss" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityContainer Name="DatabaseZTBLModelStoreContainer">
+    <EntitySet Name="BugReport" EntityType="Self.BugReport" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BugReportTable" EntityType="Self.BugReportTable" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FormData" EntityType="Self.FormData" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReleasedFilesList" EntityType="Self.ReleasedFilesList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SoftwareFeatureList" EntityType="Self.SoftwareFeatureList" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UAT Team" EntityType="Self.UAT Team" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UAT Teams" EntityType="Self.UAT Teams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UATForm" EntityType="Self.UATForm" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Form" EntityType="Self.Form" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [Form].[FormIdd] AS [FormIdd], 
+    [Form].[FormHolder] AS [FormHolder], 
+    [Form].[ProjectName] AS [ProjectName], 
+    [Form].[VersionNo] AS [VersionNo], 
+    [Form].[VersionDescription] AS [VersionDescription], 
+    [Form].[VersionDate] AS [VersionDate], 
+    [Form].[Type] AS [Type]
+    FROM [dbo].[Form] AS [Form]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>
